@@ -1,0 +1,233 @@
+import jwt from 'jsonwebtoken';
+import { PrismaClient } from '@prisma/client';
+import axios from 'axios';
+
+const prisma = new PrismaClient();
+const FLASK_API_URL = 'http://localhost:5000';
+
+// Simple text extraction functions to avoid import issues
+async function extractTextFromPDF(buffer) {
+  try {
+    const PDFParse = (await import('pdf-parse')).default;
+    const pdfData = await PDFParse(buffer);
+    return pdfData.text;
+  } catch (error) {
+    console.error('PDF extraction error:', error);
+    throw new Error('Failed to extract text from PDF');
+  }
+}
+
+async function extractTextFromDOCX(buffer) {
+  try {
+    const mammoth = await import('mammoth');
+    const result = await mammoth.extractRawText({ buffer });
+    return result.value;
+  } catch (error) {
+    console.error('DOCX extraction error:', error);
+    throw new Error('Failed to extract text from DOCX');
+  }
+}
+
+export async function POST(request) {
+  console.log('🚀 === FLASK ML RESUME ANALYSIS STARTED ===');
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache'
+  };
+
+  try {
+    // Environment checks
+    if (!process.env.JWT_SECRET) {
+      console.error('❌ JWT_SECRET missing');
+      return new Response(JSON.stringify({
+        error: 'Server configuration error: JWT_SECRET missing'
+      }), { status: 500, headers });
+    }
+
+    // Verify JWT token
+    const authHeader = request.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      console.log('❌ Authorization header missing or invalid');
+      return new Response(JSON.stringify({
+        error: 'Authorization required'
+      }), { status: 401, headers });
+    }
+
+    const token = authHeader.substring(7);
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (jwtError) {
+      return new Response(JSON.stringify({
+        error: 'Invalid or expired token'
+      }), { status: 401, headers });
+    }
+
+    // Parse request body
+    const body = await request.json();
+    const { resumeId } = body;
+
+    if (!resumeId) {
+      return new Response(JSON.stringify({
+        error: 'Resume ID is required'
+      }), { status: 400, headers });
+    }
+
+    console.log('📄 Processing resume ID for Flask ML analysis:', resumeId);
+
+    // Database connection and resume fetch
+    console.log('🔍 Connecting to database...');
+    try {
+      await prisma.$connect();
+      console.log('✅ Database connected');
+    } catch (dbConnectError) {
+      console.error('❌ Database connection failed:', dbConnectError);
+      return new Response(JSON.stringify({
+        error: 'Database connection failed',
+        details: dbConnectError.message
+      }), { status: 500, headers });
+    }
+
+    const resume = await prisma.resume.findFirst({
+      where: {
+        id: parseInt(resumeId),
+        user_id: decoded.userId
+      }
+    });
+
+    if (!resume) {
+      return new Response(JSON.stringify({
+        error: 'Resume not found or access denied'
+      }), { status: 404, headers });
+    }
+
+    console.log('✅ Resume found for Flask ML analysis:', resume.original_name);
+
+    // Extract text from file using dynamic imports
+    let extractedText = '';
+
+    try {
+      if (resume.mime_type === 'application/pdf') {
+        extractedText = await extractTextFromPDF(resume.file_data);
+      } else if (resume.mime_type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        extractedText = await extractTextFromDOCX(resume.file_data);
+      } else {
+        return new Response(JSON.stringify({
+          error: 'Unsupported file type for ML analysis'
+        }), { status: 400, headers });
+      }
+    } catch (textExtractionError) {
+      console.error('❌ Text extraction failed:', textExtractionError);
+      return new Response(JSON.stringify({
+        error: 'Failed to extract text from file',
+        details: textExtractionError.message
+      }), { status: 500, headers });
+    }
+
+    if (!extractedText || extractedText.trim().length < 10) {
+      return new Response(JSON.stringify({
+        error: 'Insufficient text for ML analysis'
+      }), { status: 400, headers });
+    }
+
+    console.log('✅ Text extracted for Flask ML analysis, length:', extractedText.length);
+
+    // Call Flask API for ML analysis
+    console.log('🔗 Calling Flask ML API...');
+    let flaskResponse;
+    try {
+      flaskResponse = await axios.post(`${FLASK_API_URL}/analyze-text`, {
+        text: extractedText
+      }, {
+        timeout: 30000,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('✅ Flask API responded successfully');
+    } catch (flaskError) {
+      console.error('❌ Flask API call failed:', flaskError.message);
+
+      // Fallback error message
+      let errorMessage = 'Flask ML API is not available';
+      if (flaskError.code === 'ECONNREFUSED') {
+        errorMessage = 'Flask ML API server is not running on localhost:5000';
+      } else if (flaskError.response) {
+        errorMessage = `Flask API error: ${flaskError.response.data?.message || flaskError.response.statusText}`;
+      }
+
+      return new Response(JSON.stringify({
+        error: 'ML analysis service unavailable',
+        details: errorMessage,
+        suggestion: 'Please ensure Flask ML API is running on localhost:5000'
+      }), { status: 503, headers });
+    }
+
+    const mlAnalysis = flaskResponse.data.analysis;
+
+    // Enhance the Flask response with additional metadata
+    const enhancedAnalysis = {
+      ...mlAnalysis,
+      mlAnalysisMethod: 'Flask ML API',
+      mlAnalyzedAt: new Date().toISOString(),
+      apiVersion: 'v1.0'
+    };
+
+    console.log('🤖 Flask ML Analysis completed:', {
+      score: enhancedAnalysis.score,
+      keywordCount: Object.keys(enhancedAnalysis.keywords || {}).length,
+      issueCount: enhancedAnalysis.issues?.length || 0,
+      suggestionCount: enhancedAnalysis.suggestions?.length || 0
+    });
+
+    // Save ML analysis to database
+    console.log('💾 Saving Flask ML analysis to database...');
+    try {
+      await prisma.resume.update({
+        where: { id: parseInt(resumeId) },
+        data: {
+          ml_analysis: JSON.stringify(enhancedAnalysis),
+          ml_score: enhancedAnalysis.score,
+          analyzed_at: new Date()
+        }
+      });
+      console.log('✅ Flask ML analysis saved to database');
+    } catch (dbError) {
+      console.error('❌ Database save failed:', dbError);
+      // Still return the analysis even if save fails
+      console.log('⚠️ Continuing without saving to database');
+    }
+
+    const response = {
+      success: true,
+      message: 'Flask ML analysis completed successfully',
+      mlAnalysis: enhancedAnalysis,
+      resumeId: resumeId,
+      analyzedAt: new Date().toISOString(),
+      source: 'Flask ML API'
+    };
+
+    console.log('🎉 SUCCESS: Flask ML Resume analysis complete');
+    return new Response(JSON.stringify(response), {
+      status: 200,
+      headers
+    });
+
+  } catch (error) {
+    console.error('💥 FLASK ML ANALYSIS ERROR:', error);
+
+    return new Response(JSON.stringify({
+      error: 'Flask ML analysis failed',
+      details: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    }), {
+      status: 500,
+      headers
+    });
+  } finally {
+    await prisma.$disconnect();
+    console.log('🏁 === FLASK ML RESUME ANALYSIS FINISHED ===');
+  }
+}

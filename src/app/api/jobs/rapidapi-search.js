@@ -1,0 +1,119 @@
+/**
+ * RapidAPI JSearch Integration
+ * Fetches REAL jobs from Google, LinkedIn, Indeed, etc.
+ * FREE tier: 150 requests/month
+ */
+
+import axios from 'axios';
+
+/**
+ * Search jobs using RapidAPI JSearch
+ * @param {string} query - Job title/keywords
+ * @param {string} location - Location (city, country)
+ * @returns {Promise<Array>} - Array of job objects
+ */
+export async function searchJobsWithRapidAPI(query, location) {
+  const apiKey = process.env.RAPIDAPI_KEY;
+
+  if (!apiKey) {
+    throw new Error('RAPIDAPI_KEY not configured in .env.local');
+  }
+
+  console.log(`🔍 Searching RapidAPI for: "${query}" in "${location}"`);
+
+  try {
+    const response = await axios.get('https://jsearch.p.rapidapi.com/search', {
+      params: {
+        query: `${query} in ${location}`,
+        page: '1',
+        num_pages: '1',
+        date_posted: 'all',
+      },
+      headers: {
+        'X-RapidAPI-Key': apiKey,
+        'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
+      },
+      timeout: 10000, // 10 second timeout
+    });
+
+    const jobs = response.data.data || [];
+
+    console.log(`✅ RapidAPI (JSearch) returned ${jobs.length} jobs`);
+
+    // Transform JSearch response to our format
+    return jobs.map((job) => ({
+      id: job.job_id || `job_${Date.now()}_${Math.random()}`,
+      title: job.job_title || 'Untitled Position',
+      company: job.employer_name || 'Company Not Specified',
+      location: job.job_city && job.job_country
+        ? `${job.job_city}, ${job.job_country}`
+        : location,
+      description: job.job_description
+        ? job.job_description.substring(0, 300) + '...'
+        : 'No description available',
+      jobUrl: job.job_apply_link || job.job_google_link || '#',
+      source: 'rapidapi-jsearch',
+      foundAt: new Date().toISOString(),
+      salary: formatSalary(job),
+      employmentType: job.job_employment_type || 'Not specified',
+      postedAt: job.job_posted_at_datetime_utc || null,
+      publisher: job.job_publisher || 'Unknown',
+      isRemote: job.job_is_remote || false,
+    }));
+
+  } catch (error) {
+    console.error('❌ RapidAPI search failed:', error.message);
+
+    if (error.response) {
+      console.error('Response status:', error.response.status);
+      console.error('Response data:', error.response.data);
+
+      if (error.response.status === 429) {
+        throw new Error('RapidAPI rate limit exceeded. Please try again later.');
+      }
+
+      if (error.response.status === 403) {
+        throw new Error('RapidAPI authentication failed. Check your API key.');
+      }
+    }
+
+    throw error;
+  }
+}
+
+/**
+ * Format salary information
+ */
+function formatSalary(job) {
+  if (job.job_min_salary && job.job_max_salary) {
+    const currency = job.job_salary_currency || 'USD';
+    const period = job.job_salary_period || 'YEAR';
+
+    return `${currency} ${formatNumber(job.job_min_salary)} - ${formatNumber(job.job_max_salary)} per ${period.toLowerCase()}`;
+  }
+
+  return 'Not specified';
+}
+
+/**
+ * Format numbers with commas
+ */
+function formatNumber(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/**
+ * Test RapidAPI connection
+ */
+export async function testRapidAPIConnection() {
+  try {
+    console.log('🧪 Testing RapidAPI connection...');
+    const jobs = await searchJobsWithRapidAPI('software engineer', 'Pakistan');
+    console.log('✅ RapidAPI test successful!');
+    console.log(`Found ${jobs.length} jobs`);
+    return true;
+  } catch (error) {
+    console.error('❌ RapidAPI test failed:', error.message);
+    return false;
+  }
+}

@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(60)
+  email      String   @unique @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  created_at DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updated_at DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  resumes    Resume[]
+
+  @@map("users")
+}
+
+model Resume {
+  id             Int       @id @default(autoincrement())
+  user_id        Int       @map("user_id")
+  original_name  String    @map("original_name") @db.VarChar(255)
+  file_name      String    @map("file_name") @db.VarChar(255)
+  file_data      Bytes     @map("file_data")
+  file_size      Int       @map("file_size")
+  mime_type      String    @map("mime_type") @db.VarChar(100)
+  uploaded_at    DateTime  @default(now()) @map("uploaded_at") @db.Timestamptz(6)
+  parsed_data    String?   @map("parsed_data")
+  extracted_text String?   @map("extracted_text")
+  analyzed_at    DateTime? @map("analyzed_at") @db.Timestamptz(6)
+  ml_analysis    String?   @map("ml_analysis")
+  ml_score       Float?    @map("ml_score")
+  user           User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("resumes")
+}
