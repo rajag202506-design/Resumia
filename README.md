@@ -8,11 +8,12 @@ This is a microservices-based application with the following components:
 
 ```
 .
-├── resumia/              # Next.js Frontend + Backend (Port 3002)
+├── src/                  # Main Next.js App (Port 3002)
 ├── webcroller/           # Job Crawler Service (Port 8000)
 ├── resume_score/         # Flask ML API (Port 5000)
 ├── resume_ml_model/      # Advanced ML Models
-└── open-resume/          # Resume Builder (Port 3001) - Located in Pictures folder
+├── open-resume/          # Resume Builder (Port 3001)
+└── prisma/               # Database Schema
 ```
 
 ## 🚀 Features
@@ -76,9 +77,8 @@ This is a microservices-based application with the following components:
 - Python 3.9+
 - PostgreSQL 15
 
-### 1. Install Resumia (Next.js Frontend)
+### 1. Install Main App (Next.js Frontend + Backend)
 ```bash
-cd resumia
 npm install
 cp .env.example .env.local
 # Edit .env.local with your credentials
@@ -116,7 +116,7 @@ python app.py
 
 Create `.env.local` files in each service directory:
 
-### resumia/.env.local
+### .env.local (root directory)
 ```env
 DATABASE_URL="postgresql://user:pass@localhost:5432/resumia"
 JWT_SECRET="your-jwt-secret"
@@ -124,6 +124,8 @@ OPENAI_API_KEY="your-openai-key"
 RAPIDAPI_KEY="your-rapidapi-key"
 USE_RAPIDAPI="true"
 NODE_ENV="development"
+NEXTAUTH_URL="http://localhost:3002"
+NEXTAUTH_SECRET="your-nextauth-secret"
 ```
 
 ### webcroller/.env
@@ -151,11 +153,11 @@ PORT=5000
 
 ## 📚 API Documentation
 
-See [SYSTEM_DOCUMENTATION.md](./SYSTEM_DOCUMENTATION.md) for complete API documentation.
+See [IMPLEMENTATION_SUMMARY.md](./IMPLEMENTATION_SUMMARY.md) for complete API documentation.
 
 ## 🚢 Deployment
 
-See [resumia/DEPLOYMENT.md](./resumia/DEPLOYMENT.md) for deployment instructions.
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for deployment instructions on Vercel, Railway, and other platforms.
 
 ### Recommended Platforms
 - **Frontend**: Vercel, Netlify
@@ -166,9 +168,10 @@ See [resumia/DEPLOYMENT.md](./resumia/DEPLOYMENT.md) for deployment instructions
 
 ```bash
 # Start all services (in separate terminals)
-cd resumia && npm run dev          # Terminal 1
-cd webcroller && npm start         # Terminal 2
-cd resume_score && python app.py   # Terminal 3
+npm run dev                        # Terminal 1 - Main app
+cd webcroller && npm start         # Terminal 2 - Job crawler
+cd resume_score && python app.py   # Terminal 3 - ML API
+cd open-resume && npm run dev      # Terminal 4 - Resume builder (optional)
 ```
 
 ## 📝 License
