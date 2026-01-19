@@ -1,0 +1,501 @@
+text,score
+"Jennifer Williams, Software Developer, Education: Bachelor's in Marketing, Ohio State University, Skills: Content Strategy, CRM, Digital Marketing, Strategic Planning, Companies: Netflix, Nike",1
+"Jessica Miller, Marketing Specialist, Education: Bachelor's in Communications, New York University, Skills: Google Analytics, Digital Marketing, Python, JavaScript, Companies: Nike, HubSpot",5
+"Jennifer Williams, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: Digital Marketing, CRM, Strategic Planning, Tableau, Companies: Uber, Salesforce",4
+"Jennifer Flores, Operations Manager, Education: Bachelor's in Marketing, UCLA, Skills: JavaScript, CRM, Digital Marketing, Leadership, Companies: Starbucks, PepsiCo",9
+"Daniel Williams, Content Writer, Education: Bachelor's in Communications, New York University, Skills: Strategic Planning, Python, Content Strategy, CRM, Companies: McDonald's, Google",7
+"Michelle Jones, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Digital Marketing, Java, AWS, SEO/SEM, Companies: Uber, PepsiCo",4
+"Jessica Williams, Sales Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Python, Leadership, JavaScript, CRM, Companies: Coca-Cola, Oracle",7
+"Robert Hill, Sales Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: SEO/SEM, AWS, Tableau, CRM, Companies: Coca-Cola, General Electric",7
+"Jennifer Brown, Software Engineer, Education: Bachelor's in Marketing, UCLA, Skills: Tableau, CRM, Leadership, Communication, Companies: IBM, Coca-Cola",4
+"Lisa Jones, Content Writer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Google Analytics, SEO/SEM, CRM, Python, Companies: McDonald's, IBM",2
+"Michelle Miller, Sales Representative, Education: Master's in Computer Science, Stanford University, Skills: Digital Marketing, Communication, Java, Content Strategy, Companies: Nike, Coca-Cola",8
+"Robert Flores, Software Developer, Education: Bachelor's in Marketing, Ohio State University, Skills: JavaScript, SQL, Content Strategy, Java, Companies: PepsiCo, General Electric",3
+"Jennifer Garcia, Customer Service Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: Java, Strategic Planning, SQL, SEO/SEM, Companies: General Electric, Oracle",1
+"Robert Flores, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Java, Communication, Google Analytics, Tableau, Companies: PepsiCo, Salesforce",4
+"Christopher Nguyen, Sales Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Java, Strategic Planning, Leadership, Communication, Companies: Salesforce, Nike",9
+"Matthew Hill, Content Writer, Education: Master's in Business Administration, Columbia University, Skills: CRM, Content Strategy, Python, Tableau, Companies: Google, HubSpot",9
+"Jessica Miller, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Communication, Content Strategy, Java, Google Analytics, Companies: IBM, McDonald's",5
+"Robert Brown, Sales Manager, Education: Bachelor's in Communications, New York University, Skills: Content Strategy, Leadership, Python, SQL, Companies: Netflix, IBM",7
+"Christopher Williams, Marketing Specialist, Education: Bachelor's in Marketing, UCLA, Skills: Python, Google Analytics, CRM, Digital Marketing, Companies: Netflix, IBM",2
+"Jennifer Garcia, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: AWS, Python, Google Analytics, SEO/SEM, Companies: PepsiCo, Coca-Cola",9
+"Jennifer Johnson, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: AWS, Python, Java, Tableau, Companies: Oracle, Amazon",8
+"Jessica Hill, Customer Service Representative, Education: Master's in Data Science, MIT, Skills: Leadership, Java, Tableau, Google Analytics, Companies: Uber, Google",5
+"Elizabeth Garcia, Software Engineer, Education: Master's in Business Administration, Columbia University, Skills: AWS, Python, JavaScript, Communication, Companies: Netflix, Oracle",3
+"Daniel Williams, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: Content Strategy, Strategic Planning, Communication, CRM, Companies: General Electric, McDonald's",9
+"Michelle Flores, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: Tableau, Python, Java, Google Analytics, Companies: Nike, McDonald's",7
+"Jessica Martinez, Operations Manager, Education: Master's in Data Science, MIT, Skills: JavaScript, Communication, Python, Strategic Planning, Companies: IBM, HubSpot",4
+"Christopher Nguyen, Sales Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Leadership, JavaScript, SQL, Strategic Planning, Companies: Starbucks, Google",6
+"Lisa Martinez, Operations Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: SEO/SEM, Python, Strategic Planning, AWS, Companies: Google, PepsiCo",6
+"Matthew Jones, Sales Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Tableau, Python, SQL, Communication, Companies: McDonald's, Salesforce",6
+"Daniel Johnson, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: SQL, Java, JavaScript, SEO/SEM, Companies: General Electric, Amazon",5
+"Jennifer Garcia, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: Strategic Planning, Communication, CRM, Content Strategy, Companies: Uber, Salesforce",9
+"Elizabeth Brown, Business Analyst, Education: Bachelor's in Computer Science, University of Washington, Skills: SQL, Java, Leadership, SEO/SEM, Companies: Coca-Cola, Google",1
+"John Williams, Marketing Specialist, Education: Bachelor's in Marketing, University of Chicago, Skills: JavaScript, CRM, Strategic Planning, Tableau, Companies: Uber, Nike",3
+"John Flores, Operations Manager, Education: Master's in Data Science, MIT, Skills: Java, Digital Marketing, Content Strategy, AWS, Companies: HubSpot, Amazon",6
+"Robert Martinez, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, Strategic Planning, Python, Content Strategy, Companies: General Electric, Amazon",10
+"Michelle Garcia, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: CRM, Strategic Planning, Tableau, Content Strategy, Companies: General Electric, Amazon",1
+"Michelle Johnson, Marketing Specialist, Education: Master's in Business Administration, Wharton, Skills: SQL, Java, AWS, CRM, Companies: Oracle, Starbucks",1
+"Matthew Johnson, Content Writer, Education: Master's in Business Administration, Columbia University, Skills: Python, JavaScript, Strategic Planning, SEO/SEM, Companies: Nike, Starbucks",6
+"Matthew Martinez, Marketing Specialist, Education: Bachelor's in Communications, University of Wisconsin, Skills: Python, Communication, Strategic Planning, Leadership, Companies: HubSpot, Netflix",3
+"Jennifer Hill, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, Google Analytics, Communication, Leadership, Companies: IBM, Netflix",8
+"Christopher Williams, Software Developer, Education: Master's in Business Administration, Columbia University, Skills: Communication, JavaScript, AWS, CRM, Companies: HubSpot, Nike",2
+"Jessica Martinez, Content Writer, Education: Bachelor's in Computer Science, University of Washington, Skills: Leadership, JavaScript, CRM, AWS, Companies: Netflix, Coca-Cola",7
+"Michelle Johnson, Software Developer, Education: Master's in Business Administration, Columbia University, Skills: SQL, Communication, Python, Google Analytics, Companies: PepsiCo, Starbucks",6
+"Daniel Flores, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: Content Strategy, Tableau, SQL, AWS, Companies: General Electric, HubSpot",6
+"Christopher Jones, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, SEO/SEM, SQL, Leadership, Companies: HubSpot, IBM",5
+"Michelle Brown, Sales Representative, Education: Bachelor's in Marketing, UCLA, Skills: Strategic Planning, Digital Marketing, SEO/SEM, Communication, Companies: McDonald's, Amazon",6
+"Jennifer Williams, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: SQL, Strategic Planning, Communication, Python, Companies: Oracle, Starbucks",4
+"Jennifer Johnson, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: Strategic Planning, Leadership, Tableau, Communication, Companies: Salesforce, Oracle",5
+"Jennifer Flores, Sales Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, Communication, Digital Marketing, Tableau, Companies: Uber, Coca-Cola",1
+"Christopher Miller, Marketing Manager, Education: Master's in Business Administration, Columbia University, Skills: Leadership, Python, Strategic Planning, SEO/SEM, Companies: Google, IBM",5
+"John Johnson, Marketing Specialist, Education: Master's in Computer Science, Stanford University, Skills: Communication, Leadership, Tableau, CRM, Companies: General Electric, Amazon",8
+"Lisa Flores, Sales Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: SEO/SEM, Leadership, Python, Communication, Companies: IBM, Google",9
+"John Johnson, Content Writer, Education: Bachelor's in Marketing, UCLA, Skills: CRM, Content Strategy, Google Analytics, SQL, Companies: Netflix, McDonald's",6
+"Jessica Jones, Content Writer, Education: Master's in Computer Science, Stanford University, Skills: SQL, Communication, Java, JavaScript, Companies: HubSpot, Starbucks",9
+"Matthew Brown, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: Python, SEO/SEM, SQL, JavaScript, Companies: PepsiCo, HubSpot",10
+"Robert Flores, Marketing Manager, Education: Master's in Data Science, MIT, Skills: AWS, Tableau, Python, Leadership, Companies: IBM, Salesforce",8
+"Christopher Miller, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Google Analytics, Communication, SQL, Digital Marketing, Companies: Oracle, Salesforce",3
+"Lisa Jones, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: Leadership, Tableau, SEO/SEM, Strategic Planning, Companies: HubSpot, Google",5
+"Lisa Williams, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Python, Tableau, CRM, SEO/SEM, Companies: Oracle, Netflix",3
+"Matthew Nguyen, Software Engineer, Education: Bachelor's in Communications, New York University, Skills: Google Analytics, Communication, JavaScript, Java, Companies: Coca-Cola, IBM",7
+"Michelle Martinez, Sales Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: Python, Content Strategy, Leadership, JavaScript, Companies: HubSpot, McDonald's",8
+"Matthew Flores, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: CRM, Tableau, AWS, JavaScript, Companies: Google, Nike",5
+"Daniel Jones, Business Analyst, Education: Bachelor's in Communications, University of Wisconsin, Skills: Google Analytics, Java, Python, Leadership, Companies: HubSpot, Netflix",4
+"Jennifer Williams, Operations Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Content Strategy, Digital Marketing, AWS, Strategic Planning, Companies: McDonald's, Coca-Cola",2
+"Matthew Jones, Software Engineer, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, Tableau, SEO/SEM, SQL, Companies: IBM, Netflix",5
+"Michelle Nguyen, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: SEO/SEM, CRM, AWS, Python, Companies: Netflix, Amazon",4
+"Lisa Williams, Business Analyst, Education: Master's in Data Science, MIT, Skills: AWS, Python, Content Strategy, Tableau, Companies: Amazon, Uber",7
+"Jennifer Brown, Content Writer, Education: Master's in Business Administration, Columbia University, Skills: Tableau, SEO/SEM, Java, Digital Marketing, Companies: Coca-Cola, HubSpot",6
+"Robert Brown, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, AWS, Java, Google Analytics, Companies: Oracle, PepsiCo",6
+"Jennifer Jones, Sales Representative, Education: Master's in Data Science, MIT, Skills: SQL, Java, Communication, AWS, Companies: Starbucks, Oracle",4
+"Jennifer Brown, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Strategic Planning, Python, AWS, CRM, Companies: Uber, Google",7
+"Daniel Miller, Customer Service Representative, Education: Master's in Business Administration, Columbia University, Skills: Python, AWS, Tableau, Google Analytics, Companies: General Electric, Google",5
+"Robert Williams, Business Analyst, Education: Bachelor's in Marketing, Ohio State University, Skills: Digital Marketing, SEO/SEM, Python, Content Strategy, Companies: Nike, Coca-Cola",6
+"Jessica Garcia, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: Tableau, Leadership, Strategic Planning, SQL, Companies: Netflix, IBM",9
+"Matthew Garcia, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Communication, CRM, Digital Marketing, SQL, Companies: HubSpot, Nike",5
+"Elizabeth Martinez, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: SQL, Python, Communication, Digital Marketing, Companies: Coca-Cola, PepsiCo",7
+"Christopher Miller, Content Writer, Education: Master's in Computer Science, Stanford University, Skills: AWS, Digital Marketing, Content Strategy, Strategic Planning, Companies: Nike, PepsiCo",4
+"Lisa Johnson, Operations Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Leadership, SEO/SEM, Digital Marketing, Content Strategy, Companies: Salesforce, Oracle",5
+"Lisa Williams, Content Writer, Education: Bachelor's in Communications, University of Wisconsin, Skills: CRM, SEO/SEM, SQL, Communication, Companies: Amazon, Salesforce",3
+"Lisa Hill, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: CRM, Java, Content Strategy, AWS, Companies: PepsiCo, Nike",5
+"Daniel Miller, Content Writer, Education: Master's in Business Administration, Columbia University, Skills: Java, Content Strategy, Tableau, SEO/SEM, Companies: HubSpot, Starbucks",5
+"Matthew Williams, Software Developer, Education: Bachelor's in Communications, New York University, Skills: Communication, AWS, JavaScript, Strategic Planning, Companies: IBM, Amazon",5
+"Matthew Nguyen, Operations Manager, Education: Master's in Data Science, MIT, Skills: SEO/SEM, Content Strategy, Strategic Planning, Tableau, Companies: HubSpot, Nike",3
+"Elizabeth Nguyen, Software Engineer, Education: Master's in Business Administration, Wharton, Skills: Communication, Content Strategy, Java, SEO/SEM, Companies: Oracle, Starbucks",7
+"Robert Jones, Content Writer, Education: Bachelor's in Computer Science, University of Washington, Skills: Leadership, Google Analytics, SEO/SEM, SQL, Companies: Salesforce, IBM",8
+"Matthew Brown, Software Developer, Education: Bachelor's in Communications, New York University, Skills: Strategic Planning, Java, CRM, Communication, Companies: Uber, PepsiCo",3
+"John Brown, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, JavaScript, Content Strategy, AWS, Companies: Amazon, PepsiCo",5
+"Michelle Johnson, Marketing Specialist, Education: Bachelor's in Marketing, University of Chicago, Skills: JavaScript, CRM, Python, Google Analytics, Companies: Starbucks, McDonald's",2
+"Lisa Hill, Marketing Manager, Education: Master's in Business Administration, Columbia University, Skills: Tableau, Google Analytics, SQL, AWS, Companies: Google, HubSpot",9
+"Lisa Jones, Content Writer, Education: Bachelor's in Marketing, UCLA, Skills: Java, CRM, SEO/SEM, Python, Companies: IBM, Google",4
+"Lisa Johnson, Software Engineer, Education: Master's in Business Administration, Wharton, Skills: Java, SEO/SEM, SQL, CRM, Companies: HubSpot, Nike",6
+"Elizabeth Hill, Customer Service Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Tableau, Python, SEO/SEM, CRM, Companies: Oracle, Netflix",5
+"Elizabeth Johnson, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: JavaScript, CRM, AWS, Digital Marketing, Companies: Oracle, PepsiCo",3
+"Jennifer Martinez, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: JavaScript, Tableau, Digital Marketing, SQL, Companies: Starbucks, Netflix",1
+"Elizabeth Brown, Sales Manager, Education: Master's in Business Administration, Columbia University, Skills: Communication, Strategic Planning, Python, Digital Marketing, Companies: HubSpot, McDonald's",7
+"Matthew Garcia, Sales Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, CRM, JavaScript, Tableau, Companies: Nike, Uber",3
+"Robert Garcia, Business Analyst, Education: Master's in Computer Science, Stanford University, Skills: Content Strategy, CRM, Strategic Planning, Tableau, Companies: Uber, IBM",5
+"Lisa Johnson, Marketing Manager, Education: Master's in Business Administration, Wharton, Skills: SQL, Leadership, Strategic Planning, JavaScript, Companies: IBM, Salesforce",9
+"Jessica Brown, Sales Representative, Education: Master's in Computer Science, Stanford University, Skills: SEO/SEM, Leadership, Java, Content Strategy, Companies: Uber, Oracle",10
+"Daniel Brown, Marketing Manager, Education: Master's in Business Administration, Wharton, Skills: JavaScript, Java, SEO/SEM, Content Strategy, Companies: Oracle, IBM",6
+"Daniel Johnson, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: AWS, Google Analytics, Leadership, Communication, Companies: Google, Starbucks",2
+"Elizabeth Martinez, Sales Manager, Education: Bachelor's in Communications, New York University, Skills: SEO/SEM, Leadership, Python, Digital Marketing, Companies: Amazon, HubSpot",4
+"John Johnson, Operations Manager, Education: Master's in Business Administration, Columbia University, Skills: AWS, Tableau, Content Strategy, Communication, Companies: McDonald's, Oracle",2
+"Lisa Jones, Operations Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, Google Analytics, JavaScript, SQL, Companies: Oracle, Coca-Cola",3
+"Matthew Hill, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: Tableau, AWS, Communication, Strategic Planning, Companies: General Electric, Starbucks",5
+"Robert Williams, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: AWS, Tableau, SQL, CRM, Companies: Google, Nike",3
+"Robert Brown, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: Python, JavaScript, Digital Marketing, AWS, Companies: Coca-Cola, HubSpot",6
+"Daniel Hill, Operations Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, Communication, Java, Leadership, Companies: Google, Amazon",10
+"Jessica Johnson, Software Engineer, Education: Bachelor's in Marketing, UCLA, Skills: Google Analytics, Leadership, Communication, Python, Companies: IBM, Uber",1
+"Jessica Nguyen, Sales Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: Strategic Planning, Digital Marketing, JavaScript, AWS, Companies: Netflix, Amazon",8
+"Jennifer Nguyen, Content Writer, Education: Master's in Data Science, MIT, Skills: Python, JavaScript, Leadership, Digital Marketing, Companies: Nike, Coca-Cola",2
+"Matthew Brown, Sales Representative, Education: Master's in Business Administration, Columbia University, Skills: AWS, Tableau, Communication, CRM, Companies: Nike, PepsiCo",4
+"Michelle Martinez, Operations Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: SQL, Strategic Planning, Python, Digital Marketing, Companies: Coca-Cola, Oracle",3
+"Daniel Flores, Operations Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, SQL, Digital Marketing, Strategic Planning, Companies: Oracle, Salesforce",4
+"Lisa Miller, Operations Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, SQL, Tableau, CRM, Companies: IBM, Nike",3
+"Elizabeth Flores, Software Engineer, Education: Bachelor's in Marketing, University of Chicago, Skills: Leadership, Python, SEO/SEM, AWS, Companies: Netflix, Starbucks",5
+"Daniel Flores, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: AWS, CRM, Content Strategy, Leadership, Companies: PepsiCo, Amazon",2
+"Robert Williams, Software Engineer, Education: Bachelor's in Marketing, UCLA, Skills: Leadership, SQL, Content Strategy, Digital Marketing, Companies: Salesforce, Uber",7
+"Jessica Garcia, Sales Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: SEO/SEM, Content Strategy, Leadership, CRM, Companies: PepsiCo, Salesforce",3
+"Michelle Williams, Business Analyst, Education: Master's in Data Science, MIT, Skills: Google Analytics, AWS, Python, Strategic Planning, Companies: Google, Netflix",5
+"Jennifer Martinez, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: SEO/SEM, SQL, Digital Marketing, Java, Companies: Google, Coca-Cola",6
+"Michelle Hill, Software Engineer, Education: Bachelor's in Communications, New York University, Skills: Leadership, Tableau, AWS, Python, Companies: Uber, Amazon",5
+"Robert Martinez, Marketing Specialist, Education: Master's in Data Science, MIT, Skills: Tableau, SQL, JavaScript, Communication, Companies: Amazon, HubSpot",5
+"Jennifer Williams, Content Writer, Education: Bachelor's in Communications, New York University, Skills: Python, Content Strategy, Digital Marketing, Java, Companies: Starbucks, Uber",9
+"Lisa Martinez, Marketing Specialist, Education: Master's in Computer Science, Stanford University, Skills: AWS, SEO/SEM, Content Strategy, SQL, Companies: Uber, Amazon",4
+"Elizabeth Johnson, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: JavaScript, Tableau, Content Strategy, CRM, Companies: Netflix, McDonald's",5
+"Elizabeth Nguyen, Customer Service Representative, Education: Master's in Business Administration, Wharton, Skills: Python, Strategic Planning, Google Analytics, AWS, Companies: HubSpot, Google",8
+"John Johnson, Sales Representative, Education: Master's in Data Science, MIT, Skills: SQL, JavaScript, Tableau, Leadership, Companies: Starbucks, Amazon",3
+"Jennifer Martinez, Software Engineer, Education: Bachelor's in Marketing, UCLA, Skills: AWS, Digital Marketing, Tableau, SEO/SEM, Companies: Google, Nike",2
+"Michelle Brown, Sales Representative, Education: Bachelor's in Marketing, UCLA, Skills: Google Analytics, AWS, JavaScript, SEO/SEM, Companies: Amazon, Nike",1
+"John Martinez, Customer Service Representative, Education: Master's in Computer Science, Stanford University, Skills: Strategic Planning, Python, AWS, Leadership, Companies: Amazon, McDonald's",5
+"Matthew Williams, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: SQL, SEO/SEM, AWS, Content Strategy, Companies: IBM, Starbucks",7
+"Matthew Jones, Marketing Specialist, Education: Bachelor's in Marketing, University of Chicago, Skills: Tableau, CRM, Digital Marketing, Google Analytics, Companies: General Electric, Salesforce",7
+"John Brown, Software Engineer, Education: Bachelor's in Computer Science, University of Washington, Skills: Content Strategy, JavaScript, AWS, CRM, Companies: PepsiCo, Salesforce",5
+"Jessica Williams, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, SEO/SEM, Google Analytics, Tableau, Companies: Coca-Cola, Starbucks",10
+"Michelle Nguyen, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: Strategic Planning, Content Strategy, Java, Python, Companies: Netflix, Google",2
+"Robert Johnson, Marketing Manager, Education: Master's in Data Science, MIT, Skills: SEO/SEM, AWS, JavaScript, Tableau, Companies: IBM, Nike",9
+"Michelle Jones, Customer Service Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Content Strategy, Digital Marketing, Python, Google Analytics, Companies: General Electric, Google",7
+"John Jones, Software Engineer, Education: Bachelor's in Marketing, University of Chicago, Skills: AWS, Strategic Planning, CRM, SQL, Companies: Uber, Starbucks",7
+"Elizabeth Williams, Customer Service Representative, Education: Master's in Business Administration, Wharton, Skills: Python, SQL, Content Strategy, Digital Marketing, Companies: HubSpot, Uber",5
+"John Martinez, Software Developer, Education: Master's in Computer Science, Stanford University, Skills: Leadership, AWS, Strategic Planning, JavaScript, Companies: Nike, Coca-Cola",3
+"Matthew Johnson, Software Developer, Education: Bachelor's in Marketing, UCLA, Skills: Python, SEO/SEM, Java, Tableau, Companies: Salesforce, McDonald's",3
+"Jennifer Hill, Business Analyst, Education: Master's in Business Administration, Wharton, Skills: SQL, AWS, Tableau, CRM, Companies: Uber, HubSpot",4
+"Robert Martinez, Marketing Manager, Education: Bachelor's in Communications, New York University, Skills: Content Strategy, CRM, SQL, SEO/SEM, Companies: Google, Starbucks",7
+"Lisa Nguyen, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: Java, AWS, Content Strategy, Tableau, Companies: McDonald's, IBM",2
+"Robert Williams, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: CRM, SEO/SEM, JavaScript, Strategic Planning, Companies: HubSpot, Coca-Cola",1
+"Robert Brown, Content Writer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Python, Communication, JavaScript, Digital Marketing, Companies: Oracle, Nike",5
+"Daniel Brown, Business Analyst, Education: Master's in Computer Science, Stanford University, Skills: Digital Marketing, Google Analytics, CRM, Python, Companies: Netflix, IBM",3
+"Elizabeth Garcia, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: Python, SQL, Content Strategy, JavaScript, Companies: Coca-Cola, General Electric",2
+"John Garcia, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Google Analytics, CRM, AWS, Leadership, Companies: PepsiCo, Amazon",9
+"Elizabeth Williams, Content Writer, Education: Master's in Business Administration, Columbia University, Skills: Content Strategy, Communication, Google Analytics, AWS, Companies: Uber, IBM",2
+"Robert Nguyen, Sales Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Digital Marketing, Tableau, Java, JavaScript, Companies: PepsiCo, McDonald's",8
+"Lisa Johnson, Operations Manager, Education: Bachelor's in Marketing, UCLA, Skills: AWS, Leadership, Content Strategy, Communication, Companies: General Electric, Starbucks",7
+"Daniel Johnson, Software Engineer, Education: Bachelor's in Marketing, University of Chicago, Skills: Digital Marketing, CRM, Java, SEO/SEM, Companies: Starbucks, McDonald's",3
+"Robert Miller, Sales Manager, Education: Bachelor's in Communications, New York University, Skills: SQL, CRM, Leadership, Java, Companies: Coca-Cola, PepsiCo",5
+"Elizabeth Miller, Content Writer, Education: Bachelor's in Marketing, UCLA, Skills: Google Analytics, Content Strategy, Java, Digital Marketing, Companies: General Electric, Uber",6
+"Lisa Miller, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, Strategic Planning, Leadership, SEO/SEM, Companies: Starbucks, Google",7
+"Michelle Miller, Sales Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, AWS, Digital Marketing, Python, Companies: Nike, PepsiCo",10
+"Daniel Jones, Sales Representative, Education: Master's in Data Science, MIT, Skills: Digital Marketing, JavaScript, Communication, Google Analytics, Companies: Starbucks, Coca-Cola",3
+"Lisa Miller, Marketing Manager, Education: Master's in Data Science, MIT, Skills: CRM, AWS, Python, SQL, Companies: General Electric, Oracle",1
+"Daniel Hill, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: Python, Tableau, Leadership, AWS, Companies: McDonald's, Uber",8
+"Michelle Brown, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, Java, Strategic Planning, SEO/SEM, Companies: McDonald's, Amazon",2
+"Robert Garcia, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Communication, Leadership, Strategic Planning, SQL, Companies: Oracle, General Electric",3
+"Jessica Flores, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Strategic Planning, Digital Marketing, Communication, SQL, Companies: Nike, Salesforce",1
+"Elizabeth Hill, Marketing Specialist, Education: Bachelor's in Marketing, Ohio State University, Skills: Java, AWS, Content Strategy, Google Analytics, Companies: Netflix, Uber",4
+"Christopher Johnson, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: AWS, CRM, Communication, SQL, Companies: PepsiCo, Uber",9
+"Elizabeth Johnson, Customer Service Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: Leadership, Communication, Java, JavaScript, Companies: Starbucks, Oracle",7
+"Jessica Brown, Software Developer, Education: Master's in Data Science, MIT, Skills: Tableau, Google Analytics, Java, Communication, Companies: Coca-Cola, General Electric",5
+"Elizabeth Johnson, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: CRM, Communication, Leadership, Google Analytics, Companies: IBM, PepsiCo",6
+"Michelle Williams, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: JavaScript, SQL, AWS, Communication, Companies: Oracle, Uber",6
+"Elizabeth Garcia, Business Analyst, Education: Master's in Business Administration, Columbia University, Skills: SEO/SEM, Tableau, Python, Java, Companies: Amazon, General Electric",6
+"Elizabeth Jones, Business Analyst, Education: Bachelor's in Marketing, Ohio State University, Skills: JavaScript, Strategic Planning, AWS, Java, Companies: Nike, McDonald's",6
+"John Flores, Software Engineer, Education: Master's in Data Science, MIT, Skills: Strategic Planning, SQL, Python, CRM, Companies: PepsiCo, Nike",1
+"Matthew Williams, Sales Representative, Education: Bachelor's in Communications, New York University, Skills: Digital Marketing, AWS, SQL, Content Strategy, Companies: HubSpot, Oracle",5
+"Lisa Hill, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Java, AWS, Leadership, JavaScript, Companies: Google, Oracle",3
+"Jennifer Williams, Software Developer, Education: Bachelor's in Computer Science, University of Washington, Skills: SQL, Tableau, Google Analytics, Leadership, Companies: HubSpot, Starbucks",7
+"John Hill, Sales Manager, Education: Master's in Business Administration, Wharton, Skills: SQL, AWS, Leadership, Java, Companies: Netflix, Nike",2
+"Lisa Hill, Business Analyst, Education: Master's in Data Science, MIT, Skills: JavaScript, Content Strategy, Leadership, SQL, Companies: Nike, Amazon",2
+"Daniel Flores, Sales Manager, Education: Master's in Data Science, MIT, Skills: Tableau, SEO/SEM, Java, Digital Marketing, Companies: Starbucks, Nike",5
+"Jessica Jones, Sales Representative, Education: Bachelor's in Communications, New York University, Skills: SQL, Content Strategy, Strategic Planning, Communication, Companies: General Electric, Google",4
+"Lisa Williams, Software Developer, Education: Master's in Business Administration, Columbia University, Skills: SQL, AWS, Strategic Planning, Digital Marketing, Companies: Coca-Cola, Google",4
+"Jennifer Johnson, Business Analyst, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, Communication, Python, Digital Marketing, Companies: HubSpot, Amazon",4
+"Daniel Williams, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: Leadership, CRM, Digital Marketing, Java, Companies: McDonald's, General Electric",5
+"Christopher Miller, Marketing Manager, Education: Master's in Business Administration, Columbia University, Skills: Google Analytics, Tableau, CRM, Python, Companies: Netflix, Uber",5
+"Jessica Garcia, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: Leadership, Python, JavaScript, Strategic Planning, Companies: PepsiCo, General Electric",9
+"Michelle Jones, Software Engineer, Education: Bachelor's in Communications, New York University, Skills: SQL, Leadership, Python, Tableau, Companies: McDonald's, Netflix",3
+"Christopher Hill, Content Writer, Education: Master's in Computer Science, Stanford University, Skills: Python, Communication, SQL, Digital Marketing, Companies: IBM, Nike",9
+"Jessica Brown, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, SQL, Digital Marketing, SEO/SEM, Companies: Google, General Electric",2
+"Elizabeth Williams, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Python, Strategic Planning, Leadership, Google Analytics, Companies: Salesforce, Amazon",6
+"Michelle Flores, Software Developer, Education: Bachelor's in Communications, New York University, Skills: Python, JavaScript, Tableau, Content Strategy, Companies: Amazon, HubSpot",5
+"Michelle Nguyen, Software Engineer, Education: Master's in Computer Science, Stanford University, Skills: Digital Marketing, SQL, Leadership, AWS, Companies: Netflix, General Electric",5
+"John Brown, Software Developer, Education: Master's in Business Administration, Wharton, Skills: Digital Marketing, CRM, SEO/SEM, Leadership, Companies: Amazon, Uber",7
+"Jennifer Hill, Sales Representative, Education: Master's in Computer Science, Stanford University, Skills: SQL, Strategic Planning, Google Analytics, Leadership, Companies: HubSpot, Netflix",4
+"Robert Miller, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Google Analytics, Java, SEO/SEM, Python, Companies: HubSpot, Amazon",9
+"Jennifer Williams, Business Analyst, Education: Master's in Business Administration, Wharton, Skills: Communication, JavaScript, CRM, AWS, Companies: Google, Amazon",6
+"Daniel Johnson, Sales Representative, Education: Bachelor's in Marketing, UCLA, Skills: Python, Communication, AWS, SQL, Companies: PepsiCo, Uber",5
+"Michelle Nguyen, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: SQL, Leadership, Python, Strategic Planning, Companies: Coca-Cola, IBM",5
+"Robert Johnson, Customer Service Representative, Education: Bachelor's in Marketing, UCLA, Skills: Java, Strategic Planning, SEO/SEM, Digital Marketing, Companies: Uber, IBM",9
+"Christopher Williams, Operations Manager, Education: Master's in Computer Science, Stanford University, Skills: Digital Marketing, Strategic Planning, Google Analytics, Content Strategy, Companies: McDonald's, Amazon",8
+"John Jones, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, Tableau, Python, CRM, Companies: HubSpot, IBM",10
+"Robert Nguyen, Marketing Manager, Education: Master's in Business Administration, Columbia University, Skills: SEO/SEM, Digital Marketing, Content Strategy, JavaScript, Companies: PepsiCo, General Electric",6
+"John Nguyen, Software Developer, Education: Master's in Computer Science, Stanford University, Skills: Google Analytics, CRM, Content Strategy, Tableau, Companies: Starbucks, Netflix",2
+"Christopher Garcia, Business Analyst, Education: Master's in Data Science, MIT, Skills: Content Strategy, SQL, AWS, Leadership, Companies: IBM, Starbucks",7
+"John Martinez, Business Analyst, Education: Master's in Computer Science, Stanford University, Skills: Leadership, SEO/SEM, Python, Content Strategy, Companies: Google, Starbucks",6
+"Jennifer Brown, Marketing Specialist, Education: Bachelor's in Marketing, University of Chicago, Skills: Python, Digital Marketing, CRM, Java, Companies: Starbucks, McDonald's",3
+"Christopher Martinez, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: SQL, SEO/SEM, Python, AWS, Companies: McDonald's, Uber",2
+"Jessica Nguyen, Customer Service Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, AWS, CRM, JavaScript, Companies: Coca-Cola, General Electric",8
+"Christopher Brown, Software Developer, Education: Master's in Business Administration, Wharton, Skills: Java, Digital Marketing, Google Analytics, SEO/SEM, Companies: IBM, Oracle",5
+"Michelle Miller, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: Leadership, Google Analytics, Tableau, Digital Marketing, Companies: Netflix, McDonald's",4
+"Lisa Johnson, Software Developer, Education: Master's in Business Administration, Columbia University, Skills: Java, AWS, Leadership, Google Analytics, Companies: Nike, Google",3
+"Christopher Miller, Marketing Manager, Education: Master's in Data Science, MIT, Skills: Strategic Planning, CRM, Tableau, SEO/SEM, Companies: Oracle, Starbucks",6
+"Daniel Flores, Customer Service Representative, Education: Master's in Computer Science, Stanford University, Skills: Digital Marketing, Tableau, SEO/SEM, CRM, Companies: Starbucks, Oracle",7
+"Matthew Nguyen, Business Analyst, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, Strategic Planning, Leadership, CRM, Companies: Coca-Cola, Oracle",6
+"John Jones, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: Communication, CRM, Leadership, SEO/SEM, Companies: Coca-Cola, Salesforce",6
+"Jessica Johnson, Content Writer, Education: Master's in Data Science, MIT, Skills: Strategic Planning, Google Analytics, SQL, Content Strategy, Companies: HubSpot, McDonald's",2
+"Matthew Flores, Sales Manager, Education: Master's in Data Science, MIT, Skills: Java, Python, Google Analytics, AWS, Companies: Nike, McDonald's",3
+"Robert Hill, Marketing Manager, Education: Master's in Data Science, MIT, Skills: Python, SQL, JavaScript, Google Analytics, Companies: PepsiCo, Coca-Cola",9
+"Lisa Brown, Marketing Specialist, Education: Bachelor's in Communications, New York University, Skills: Tableau, SQL, Content Strategy, CRM, Companies: Google, Oracle",5
+"Robert Jones, Software Developer, Education: Bachelor's in Communications, New York University, Skills: SQL, AWS, Tableau, JavaScript, Companies: IBM, HubSpot",5
+"Elizabeth Martinez, Sales Representative, Education: Bachelor's in Marketing, UCLA, Skills: Leadership, Python, AWS, CRM, Companies: Google, Netflix",3
+"Jessica Jones, Sales Manager, Education: Master's in Data Science, MIT, Skills: Tableau, SEO/SEM, Content Strategy, CRM, Companies: Uber, McDonald's",10
+"Elizabeth Garcia, Marketing Manager, Education: Master's in Computer Science, Stanford University, Skills: Communication, JavaScript, Digital Marketing, SEO/SEM, Companies: Netflix, HubSpot",5
+"Jennifer Johnson, Business Analyst, Education: Master's in Computer Science, Stanford University, Skills: Java, Leadership, Python, SEO/SEM, Companies: Coca-Cola, PepsiCo",5
+"Christopher Jones, Software Developer, Education: Master's in Computer Science, Stanford University, Skills: Java, Google Analytics, Tableau, CRM, Companies: Amazon, Salesforce",8
+"John Brown, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: Content Strategy, Digital Marketing, SEO/SEM, Python, Companies: Netflix, General Electric",8
+"Matthew Martinez, Software Engineer, Education: Master's in Computer Science, Stanford University, Skills: Communication, Java, AWS, Strategic Planning, Companies: Amazon, Salesforce",6
+"Matthew Martinez, Software Engineer, Education: Master's in Business Administration, Columbia University, Skills: SEO/SEM, AWS, Python, CRM, Companies: Oracle, General Electric",10
+"Michelle Garcia, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: Leadership, Tableau, Java, CRM, Companies: Nike, Google",2
+"Daniel Martinez, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, Leadership, Digital Marketing, Python, Companies: Nike, Oracle",2
+"John Williams, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: Communication, Strategic Planning, AWS, Java, Companies: IBM, Salesforce",9
+"Daniel Brown, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Java, JavaScript, Strategic Planning, SEO/SEM, Companies: Uber, McDonald's",9
+"Elizabeth Martinez, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: SQL, CRM, Digital Marketing, JavaScript, Companies: Salesforce, Google",2
+"Robert Jones, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Google Analytics, Digital Marketing, Communication, SEO/SEM, Companies: PepsiCo, Uber",4
+"Jennifer Williams, Software Engineer, Education: Bachelor's in Marketing, University of Chicago, Skills: CRM, Python, Java, Strategic Planning, Companies: Salesforce, Nike",7
+"Lisa Garcia, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Tableau, CRM, Leadership, JavaScript, Companies: Nike, Coca-Cola",6
+"Jennifer Nguyen, Content Writer, Education: Master's in Business Administration, Columbia University, Skills: Leadership, Strategic Planning, Communication, SQL, Companies: General Electric, Netflix",7
+"Daniel Miller, Software Engineer, Education: Master's in Data Science, MIT, Skills: Java, Tableau, SEO/SEM, Communication, Companies: Coca-Cola, Google",4
+"Daniel Jones, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: Digital Marketing, Strategic Planning, SQL, Communication, Companies: Nike, General Electric",2
+"Michelle Miller, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: CRM, Java, JavaScript, SQL, Companies: Coca-Cola, Nike",1
+"Robert Johnson, Software Developer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Java, Strategic Planning, Python, Digital Marketing, Companies: IBM, Oracle",5
+"Matthew Nguyen, Customer Service Representative, Education: Master's in Business Administration, Columbia University, Skills: Strategic Planning, Digital Marketing, SEO/SEM, JavaScript, Companies: Uber, McDonald's",6
+"John Miller, Marketing Specialist, Education: Master's in Data Science, MIT, Skills: Digital Marketing, CRM, Communication, JavaScript, Companies: General Electric, Amazon",8
+"Lisa Martinez, Marketing Manager, Education: Master's in Computer Science, Stanford University, Skills: Google Analytics, Digital Marketing, AWS, JavaScript, Companies: Oracle, Nike",6
+"Christopher Miller, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Java, Leadership, Content Strategy, Google Analytics, Companies: Nike, Google",9
+"Matthew Brown, Marketing Specialist, Education: Bachelor's in Marketing, Ohio State University, Skills: SQL, JavaScript, Content Strategy, SEO/SEM, Companies: Uber, McDonald's",4
+"Christopher Garcia, Software Engineer, Education: Bachelor's in Communications, New York University, Skills: Python, SEO/SEM, Strategic Planning, JavaScript, Companies: Amazon, HubSpot",3
+"Daniel Garcia, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, Google Analytics, Leadership, AWS, Companies: IBM, Amazon",3
+"Matthew Martinez, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Strategic Planning, Content Strategy, Java, AWS, Companies: Nike, IBM",8
+"Michelle Hill, Sales Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Java, Strategic Planning, Leadership, AWS, Companies: HubSpot, Coca-Cola",1
+"John Hill, Content Writer, Education: Master's in Data Science, MIT, Skills: AWS, JavaScript, Leadership, SEO/SEM, Companies: McDonald's, Starbucks",4
+"Christopher Brown, Customer Service Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Communication, Google Analytics, SEO/SEM, AWS, Companies: Uber, Amazon",2
+"Jennifer Jones, Business Analyst, Education: Master's in Business Administration, Columbia University, Skills: SEO/SEM, Tableau, SQL, Digital Marketing, Companies: PepsiCo, Amazon",3
+"Lisa Williams, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: Java, Digital Marketing, Google Analytics, Strategic Planning, Companies: Coca-Cola, Starbucks",6
+"Lisa Hill, Software Developer, Education: Bachelor's in Marketing, UCLA, Skills: Content Strategy, Strategic Planning, SEO/SEM, Communication, Companies: Amazon, PepsiCo",3
+"Elizabeth Hill, Software Developer, Education: Master's in Computer Science, Stanford University, Skills: Python, Communication, Java, Content Strategy, Companies: McDonald's, General Electric",2
+"Christopher Williams, Customer Service Representative, Education: Bachelor's in Communications, New York University, Skills: AWS, Google Analytics, Python, Leadership, Companies: Google, HubSpot",10
+"Daniel Nguyen, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Java, Strategic Planning, Communication, Google Analytics, Companies: IBM, Amazon",5
+"Robert Hill, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Google Analytics, Digital Marketing, Leadership, Tableau, Companies: Starbucks, McDonald's",3
+"Jessica Johnson, Marketing Manager, Education: Master's in Business Administration, Wharton, Skills: Java, JavaScript, AWS, Tableau, Companies: Netflix, IBM",5
+"Daniel Miller, Content Writer, Education: Bachelor's in Communications, New York University, Skills: Tableau, SEO/SEM, Google Analytics, SQL, Companies: Starbucks, Oracle",6
+"Jessica Garcia, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: JavaScript, Digital Marketing, SEO/SEM, Google Analytics, Companies: Nike, General Electric",9
+"Matthew Garcia, Software Engineer, Education: Master's in Computer Science, Stanford University, Skills: Strategic Planning, Digital Marketing, SEO/SEM, Communication, Companies: Oracle, HubSpot",1
+"Michelle Hill, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Java, Digital Marketing, SEO/SEM, AWS, Companies: Amazon, Oracle",4
+"Michelle Flores, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: SQL, Java, Content Strategy, AWS, Companies: McDonald's, Amazon",3
+"Jennifer Flores, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: Communication, Java, CRM, JavaScript, Companies: PepsiCo, Uber",4
+"Michelle Garcia, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: Content Strategy, Digital Marketing, Python, Java, Companies: Amazon, McDonald's",9
+"Daniel Hill, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, SQL, Leadership, Tableau, Companies: HubSpot, McDonald's",4
+"Christopher Brown, Customer Service Representative, Education: Master's in Computer Science, Stanford University, Skills: Content Strategy, JavaScript, Tableau, Digital Marketing, Companies: General Electric, HubSpot",1
+"Elizabeth Johnson, Business Analyst, Education: Bachelor's in Marketing, Ohio State University, Skills: SEO/SEM, Google Analytics, Java, JavaScript, Companies: Amazon, Coca-Cola",5
+"Michelle Williams, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Content Strategy, JavaScript, SQL, Google Analytics, Companies: Oracle, Starbucks",9
+"John Nguyen, Operations Manager, Education: Master's in Business Administration, Columbia University, Skills: Google Analytics, AWS, SEO/SEM, Content Strategy, Companies: Oracle, PepsiCo",8
+"Daniel Flores, Customer Service Representative, Education: Master's in Data Science, MIT, Skills: AWS, Communication, Tableau, Leadership, Companies: Coca-Cola, Netflix",7
+"Elizabeth Jones, Business Analyst, Education: Master's in Business Administration, Columbia University, Skills: Java, AWS, Tableau, SQL, Companies: Oracle, Starbucks",1
+"Christopher Martinez, Customer Service Representative, Education: Master's in Business Administration, Wharton, Skills: Content Strategy, SQL, SEO/SEM, JavaScript, Companies: HubSpot, Amazon",5
+"Christopher Johnson, Marketing Manager, Education: Master's in Data Science, MIT, Skills: CRM, JavaScript, SEO/SEM, Python, Companies: Nike, Oracle",4
+"John Miller, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, Java, Python, CRM, Companies: Oracle, PepsiCo",6
+"Jessica Nguyen, Business Analyst, Education: Master's in Data Science, MIT, Skills: Java, Python, Leadership, Strategic Planning, Companies: Google, Netflix",6
+"Daniel Flores, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: Java, Google Analytics, Leadership, Content Strategy, Companies: McDonald's, Nike",5
+"Elizabeth Hill, Sales Representative, Education: Master's in Computer Science, Stanford University, Skills: AWS, Python, Communication, Content Strategy, Companies: Nike, Starbucks",3
+"Christopher Nguyen, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: Google Analytics, AWS, Python, Java, Companies: Nike, Uber",5
+"Christopher Jones, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: SEO/SEM, JavaScript, Digital Marketing, CRM, Companies: Coca-Cola, General Electric",5
+"Robert Brown, Content Writer, Education: Bachelor's in Marketing, Ohio State University, Skills: Communication, Python, SEO/SEM, Java, Companies: General Electric, Netflix",7
+"Christopher Flores, Software Engineer, Education: Master's in Data Science, MIT, Skills: CRM, Leadership, Communication, SQL, Companies: PepsiCo, General Electric",4
+"Jessica Miller, Marketing Manager, Education: Master's in Business Administration, Wharton, Skills: Communication, Strategic Planning, AWS, Tableau, Companies: Coca-Cola, Salesforce",6
+"Michelle Nguyen, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: Leadership, CRM, JavaScript, SEO/SEM, Companies: Google, General Electric",7
+"John Johnson, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: SQL, Communication, Content Strategy, JavaScript, Companies: Oracle, Nike",5
+"Lisa Martinez, Software Developer, Education: Master's in Business Administration, Columbia University, Skills: Digital Marketing, Content Strategy, Python, SQL, Companies: Oracle, Google",5
+"Jennifer Williams, Software Engineer, Education: Master's in Data Science, MIT, Skills: Content Strategy, SQL, SEO/SEM, Strategic Planning, Companies: Oracle, General Electric",3
+"Matthew Garcia, Sales Representative, Education: Master's in Business Administration, Columbia University, Skills: Digital Marketing, Communication, CRM, Content Strategy, Companies: Uber, Starbucks",2
+"Matthew Garcia, Software Developer, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, Digital Marketing, Google Analytics, Strategic Planning, Companies: Oracle, Amazon",3
+"Lisa Jones, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Strategic Planning, Content Strategy, SQL, Google Analytics, Companies: Amazon, Starbucks",9
+"Lisa Garcia, Software Developer, Education: Master's in Data Science, MIT, Skills: Tableau, AWS, Strategic Planning, Google Analytics, Companies: Amazon, Salesforce",6
+"Elizabeth Nguyen, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: AWS, Tableau, Strategic Planning, Content Strategy, Companies: HubSpot, Uber",10
+"Lisa Nguyen, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, AWS, JavaScript, Leadership, Companies: HubSpot, Nike",7
+"Lisa Flores, Software Developer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Communication, Tableau, Python, Java, Companies: Amazon, Salesforce",2
+"Elizabeth Johnson, Software Engineer, Education: Master's in Data Science, MIT, Skills: Java, Google Analytics, Content Strategy, SQL, Companies: McDonald's, Amazon",3
+"Matthew Williams, Business Analyst, Education: Master's in Business Administration, Columbia University, Skills: SQL, Content Strategy, Python, Digital Marketing, Companies: Netflix, Starbucks",9
+"John Garcia, Marketing Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Content Strategy, Tableau, CRM, Digital Marketing, Companies: Starbucks, Oracle",4
+"John Hill, Customer Service Representative, Education: Master's in Business Administration, Wharton, Skills: Communication, Java, Digital Marketing, AWS, Companies: Amazon, Oracle",8
+"Michelle Hill, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Leadership, Digital Marketing, Content Strategy, Google Analytics, Companies: PepsiCo, Netflix",4
+"Daniel Nguyen, Customer Service Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: Google Analytics, Leadership, SEO/SEM, CRM, Companies: Amazon, HubSpot",1
+"Lisa Miller, Software Engineer, Education: Bachelor's in Marketing, University of Chicago, Skills: Python, JavaScript, Content Strategy, SQL, Companies: General Electric, PepsiCo",4
+"Elizabeth Martinez, Marketing Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: SEO/SEM, CRM, Python, SQL, Companies: Nike, Google",8
+"Michelle Jones, Operations Manager, Education: Master's in Computer Science, Stanford University, Skills: Leadership, CRM, JavaScript, Google Analytics, Companies: McDonald's, HubSpot",8
+"Christopher Johnson, Marketing Specialist, Education: Master's in Business Administration, Wharton, Skills: Google Analytics, Python, Communication, Digital Marketing, Companies: Oracle, Uber",10
+"Lisa Brown, Software Developer, Education: Bachelor's in Marketing, Ohio State University, Skills: SEO/SEM, Content Strategy, JavaScript, Strategic Planning, Companies: Starbucks, IBM",6
+"Lisa Brown, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Strategic Planning, SQL, Java, JavaScript, Companies: Nike, Oracle",2
+"Jennifer Jones, Business Analyst, Education: Bachelor's in Computer Science, University of Washington, Skills: SQL, Tableau, SEO/SEM, Python, Companies: Salesforce, HubSpot",5
+"Elizabeth Williams, Content Writer, Education: Bachelor's in Communications, New York University, Skills: Communication, Leadership, Tableau, Strategic Planning, Companies: HubSpot, Coca-Cola",3
+"Christopher Jones, Operations Manager, Education: Master's in Business Administration, Columbia University, Skills: JavaScript, Communication, Tableau, CRM, Companies: Starbucks, Amazon",9
+"Jessica Nguyen, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: SEO/SEM, Python, Content Strategy, Strategic Planning, Companies: Salesforce, Google",9
+"Robert Hill, Software Developer, Education: Bachelor's in Marketing, UCLA, Skills: Leadership, CRM, JavaScript, SQL, Companies: IBM, Netflix",1
+"Christopher Miller, Marketing Manager, Education: Bachelor's in Communications, New York University, Skills: Strategic Planning, SEO/SEM, Python, AWS, Companies: Coca-Cola, General Electric",6
+"John Martinez, Content Writer, Education: Master's in Computer Science, Stanford University, Skills: AWS, Communication, SQL, Strategic Planning, Companies: General Electric, IBM",9
+"Robert Jones, Marketing Specialist, Education: Bachelor's in Communications, New York University, Skills: Python, Java, SQL, Communication, Companies: Salesforce, Uber",9
+"Jessica Jones, Software Developer, Education: Master's in Data Science, MIT, Skills: Google Analytics, Python, Leadership, SEO/SEM, Companies: HubSpot, McDonald's",3
+"Robert Brown, Operations Manager, Education: Bachelor's in Communications, New York University, Skills: Python, Digital Marketing, AWS, Strategic Planning, Companies: Salesforce, Oracle",7
+"Elizabeth Brown, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Communication, Strategic Planning, CRM, Content Strategy, Companies: PepsiCo, Netflix",2
+"Daniel Garcia, Customer Service Representative, Education: Master's in Business Administration, Columbia University, Skills: JavaScript, Digital Marketing, CRM, SEO/SEM, Companies: PepsiCo, General Electric",7
+"Matthew Hill, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: Python, CRM, SQL, Leadership, Companies: General Electric, Nike",2
+"Jessica Flores, Business Analyst, Education: Master's in Data Science, MIT, Skills: Python, Communication, Leadership, SEO/SEM, Companies: IBM, McDonald's",7
+"Daniel Miller, Marketing Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: CRM, Tableau, SEO/SEM, Digital Marketing, Companies: PepsiCo, Starbucks",9
+"Lisa Flores, Software Engineer, Education: Master's in Data Science, MIT, Skills: Tableau, Content Strategy, Leadership, JavaScript, Companies: Google, HubSpot",8
+"John Williams, Sales Manager, Education: Bachelor's in Communications, New York University, Skills: SQL, Content Strategy, SEO/SEM, Java, Companies: IBM, Uber",1
+"Lisa Martinez, Software Developer, Education: Bachelor's in Computer Science, University of Washington, Skills: Tableau, Digital Marketing, Content Strategy, Python, Companies: Nike, PepsiCo",3
+"Elizabeth Williams, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, Strategic Planning, SQL, Communication, Companies: Coca-Cola, McDonald's",6
+"Matthew Williams, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Content Strategy, Tableau, Digital Marketing, Python, Companies: Netflix, Oracle",3
+"Matthew Hill, Customer Service Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: AWS, Strategic Planning, Content Strategy, Python, Companies: General Electric, Nike",10
+"Christopher Martinez, Content Writer, Education: Master's in Data Science, MIT, Skills: CRM, Digital Marketing, Python, SEO/SEM, Companies: PepsiCo, Starbucks",3
+"Lisa Jones, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: AWS, SEO/SEM, Python, JavaScript, Companies: Uber, Oracle",4
+"Elizabeth Miller, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Java, Tableau, Python, Communication, Companies: IBM, PepsiCo",9
+"Christopher Martinez, Software Engineer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Communication, SEO/SEM, Leadership, Strategic Planning, Companies: Google, McDonald's",6
+"Robert Garcia, Software Developer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Strategic Planning, Java, JavaScript, SQL, Companies: Nike, HubSpot",5
+"Christopher Martinez, Customer Service Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: Python, AWS, Leadership, SEO/SEM, Companies: Uber, Coca-Cola",5
+"Daniel Johnson, Customer Service Representative, Education: Master's in Computer Science, Stanford University, Skills: Python, Java, Strategic Planning, Leadership, Companies: Salesforce, PepsiCo",5
+"Matthew Nguyen, Sales Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: CRM, JavaScript, Digital Marketing, Strategic Planning, Companies: Coca-Cola, Nike",4
+"Matthew Nguyen, Sales Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: JavaScript, Google Analytics, Communication, SQL, Companies: McDonald's, IBM",10
+"Daniel Johnson, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: Communication, Tableau, Leadership, Python, Companies: Google, HubSpot",5
+"Robert Jones, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: AWS, Leadership, CRM, JavaScript, Companies: McDonald's, Amazon",6
+"Michelle Martinez, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: JavaScript, Content Strategy, Strategic Planning, AWS, Companies: Uber, Coca-Cola",2
+"Lisa Hill, Marketing Specialist, Education: Bachelor's in Marketing, University of Chicago, Skills: Java, Leadership, Tableau, Content Strategy, Companies: Google, Coca-Cola",3
+"Michelle Johnson, Sales Manager, Education: Master's in Business Administration, Wharton, Skills: JavaScript, Strategic Planning, Google Analytics, Java, Companies: Starbucks, HubSpot",6
+"Michelle Hill, Operations Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Content Strategy, Python, Digital Marketing, Google Analytics, Companies: Salesforce, Uber",5
+"Daniel Garcia, Operations Manager, Education: Master's in Data Science, MIT, Skills: Digital Marketing, Google Analytics, Tableau, SEO/SEM, Companies: Nike, Uber",10
+"Matthew Garcia, Marketing Manager, Education: Bachelor's in Communications, New York University, Skills: Java, SEO/SEM, CRM, Strategic Planning, Companies: Starbucks, Nike",2
+"Jessica Nguyen, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: Leadership, Python, SEO/SEM, JavaScript, Companies: Salesforce, Nike",2
+"Elizabeth Brown, Customer Service Representative, Education: Bachelor's in Marketing, UCLA, Skills: Java, Strategic Planning, SEO/SEM, Google Analytics, Companies: HubSpot, Oracle",10
+"Daniel Miller, Software Developer, Education: Master's in Business Administration, Columbia University, Skills: SQL, Google Analytics, Python, Java, Companies: Google, Oracle",2
+"Daniel Jones, Operations Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Google Analytics, Java, Leadership, CRM, Companies: McDonald's, Uber",2
+"Jessica Williams, Customer Service Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: CRM, Communication, Strategic Planning, Java, Companies: McDonald's, Starbucks",5
+"Christopher Nguyen, Customer Service Representative, Education: Master's in Business Administration, Columbia University, Skills: Communication, Tableau, CRM, SQL, Companies: Nike, Uber",3
+"John Johnson, Marketing Specialist, Education: Master's in Business Administration, Wharton, Skills: SQL, Google Analytics, JavaScript, SEO/SEM, Companies: HubSpot, Amazon",6
+"Daniel Nguyen, Sales Representative, Education: Master's in Business Administration, Columbia University, Skills: Strategic Planning, SEO/SEM, Tableau, Communication, Companies: IBM, Coca-Cola",6
+"John Jones, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: JavaScript, Google Analytics, Digital Marketing, Content Strategy, Companies: Nike, Coca-Cola",5
+"Robert Garcia, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: Digital Marketing, Python, Java, SQL, Companies: Google, Nike",8
+"Jessica Martinez, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: Digital Marketing, Communication, Strategic Planning, JavaScript, Companies: Oracle, Amazon",1
+"Christopher Brown, Customer Service Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: Communication, SQL, AWS, CRM, Companies: Salesforce, General Electric",5
+"Jennifer Miller, Operations Manager, Education: Bachelor's in Communications, New York University, Skills: Content Strategy, Digital Marketing, Tableau, AWS, Companies: Amazon, PepsiCo",3
+"John Johnson, Customer Service Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: Leadership, JavaScript, AWS, Strategic Planning, Companies: Nike, Salesforce",2
+"Matthew Hill, Software Engineer, Education: Bachelor's in Computer Science, University of Washington, Skills: CRM, AWS, Content Strategy, SQL, Companies: IBM, Nike",8
+"Matthew Johnson, Software Engineer, Education: Master's in Computer Science, Stanford University, Skills: Google Analytics, SQL, SEO/SEM, AWS, Companies: Google, Salesforce",7
+"Jennifer Garcia, Software Developer, Education: Bachelor's in Marketing, Ohio State University, Skills: Strategic Planning, CRM, SEO/SEM, Leadership, Companies: Oracle, Uber",1
+"Robert Flores, Marketing Manager, Education: Master's in Data Science, MIT, Skills: AWS, Digital Marketing, Java, Google Analytics, Companies: Uber, HubSpot",4
+"Jessica Johnson, Software Engineer, Education: Master's in Data Science, MIT, Skills: Communication, Java, Leadership, Python, Companies: Uber, Amazon",6
+"Matthew Miller, Operations Manager, Education: Master's in Data Science, MIT, Skills: Java, Content Strategy, SQL, Communication, Companies: PepsiCo, General Electric",4
+"Robert Johnson, Marketing Specialist, Education: Bachelor's in Marketing, Ohio State University, Skills: SEO/SEM, Digital Marketing, Strategic Planning, Communication, Companies: Amazon, Starbucks",3
+"Lisa Nguyen, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: SQL, JavaScript, CRM, AWS, Companies: HubSpot, Nike",4
+"Elizabeth Jones, Marketing Manager, Education: Master's in Business Administration, Wharton, Skills: AWS, CRM, SEO/SEM, JavaScript, Companies: IBM, Oracle",4
+"Jennifer Martinez, Customer Service Representative, Education: Master's in Business Administration, Wharton, Skills: Digital Marketing, SEO/SEM, Leadership, Java, Companies: Amazon, McDonald's",4
+"John Miller, Customer Service Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: Tableau, SQL, CRM, JavaScript, Companies: General Electric, PepsiCo",6
+"John Flores, Operations Manager, Education: Master's in Business Administration, Wharton, Skills: Communication, SQL, JavaScript, Digital Marketing, Companies: General Electric, Uber",9
+"Lisa Nguyen, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: Strategic Planning, Content Strategy, Leadership, Python, Companies: IBM, Coca-Cola",8
+"Michelle Martinez, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: Python, Tableau, Java, Digital Marketing, Companies: Uber, Oracle",7
+"Christopher Johnson, Marketing Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Strategic Planning, Tableau, Python, Java, Companies: McDonald's, Netflix",7
+"Michelle Jones, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: SEO/SEM, Python, Digital Marketing, SQL, Companies: Google, Starbucks",2
+"Jessica Johnson, Software Developer, Education: Bachelor's in Computer Science, University of Washington, Skills: Digital Marketing, Python, Communication, Content Strategy, Companies: PepsiCo, McDonald's",9
+"Lisa Flores, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, Leadership, CRM, Google Analytics, Companies: IBM, Amazon",9
+"Matthew Hill, Content Writer, Education: Bachelor's in Computer Science, University of Washington, Skills: SQL, Communication, Python, AWS, Companies: McDonald's, PepsiCo",9
+"Jessica Martinez, Marketing Specialist, Education: Bachelor's in Communications, University of Wisconsin, Skills: SEO/SEM, Python, Communication, Google Analytics, Companies: Oracle, Starbucks",10
+"Matthew Miller, Business Analyst, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, Python, Leadership, Google Analytics, Companies: HubSpot, Amazon",2
+"Christopher Garcia, Business Analyst, Education: Master's in Data Science, MIT, Skills: Python, Java, AWS, Content Strategy, Companies: Starbucks, PepsiCo",9
+"Jessica Flores, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Communication, AWS, Java, Google Analytics, Companies: Starbucks, Salesforce",8
+"Jennifer Hill, Business Analyst, Education: Bachelor's in Communications, New York University, Skills: Strategic Planning, JavaScript, Java, SQL, Companies: McDonald's, Uber",2
+"Jessica Jones, Content Writer, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, Strategic Planning, Leadership, Tableau, Companies: Netflix, Uber",4
+"Jennifer Martinez, Marketing Specialist, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, Leadership, SQL, Digital Marketing, Companies: McDonald's, Uber",9
+"Christopher Nguyen, Customer Service Representative, Education: Master's in Business Administration, Columbia University, Skills: AWS, Leadership, SQL, JavaScript, Companies: PepsiCo, Netflix",10
+"Jessica Brown, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: Google Analytics, Digital Marketing, Python, Tableau, Companies: Nike, Netflix",7
+"Christopher Flores, Software Engineer, Education: Master's in Data Science, MIT, Skills: Java, Leadership, AWS, Tableau, Companies: General Electric, PepsiCo",5
+"Elizabeth Brown, Marketing Manager, Education: Bachelor's in Marketing, UCLA, Skills: Communication, Tableau, JavaScript, CRM, Companies: Coca-Cola, Netflix",10
+"Daniel Miller, Software Developer, Education: Master's in Computer Science, Stanford University, Skills: SEO/SEM, Digital Marketing, CRM, Google Analytics, Companies: Amazon, Netflix",10
+"John Johnson, Content Writer, Education: Bachelor's in Computer Science, University of Washington, Skills: Google Analytics, Content Strategy, AWS, Communication, Companies: Coca-Cola, HubSpot",4
+"Jennifer Jones, Marketing Manager, Education: Master's in Data Science, MIT, Skills: Content Strategy, AWS, Google Analytics, Python, Companies: General Electric, IBM",6
+"Jessica Brown, Sales Manager, Education: Master's in Business Administration, Wharton, Skills: Leadership, Java, Content Strategy, SQL, Companies: IBM, Google",9
+"John Martinez, Business Analyst, Education: Bachelor's in Marketing, Ohio State University, Skills: Content Strategy, Tableau, Digital Marketing, CRM, Companies: Uber, McDonald's",7
+"Daniel Nguyen, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: Google Analytics, JavaScript, Tableau, Communication, Companies: Coca-Cola, Nike",3
+"John Johnson, Sales Manager, Education: Master's in Business Administration, Columbia University, Skills: Google Analytics, SEO/SEM, Digital Marketing, Content Strategy, Companies: Nike, General Electric",9
+"Lisa Nguyen, Marketing Specialist, Education: Master's in Data Science, MIT, Skills: Tableau, Java, Communication, Python, Companies: General Electric, Oracle",8
+"Lisa Miller, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: AWS, Content Strategy, Leadership, JavaScript, Companies: Salesforce, Amazon",7
+"Robert Flores, Software Developer, Education: Bachelor's in Computer Science, University of Washington, Skills: CRM, JavaScript, Google Analytics, Python, Companies: McDonald's, HubSpot",3
+"Jessica Johnson, Software Developer, Education: Master's in Business Administration, Wharton, Skills: Java, Python, CRM, Digital Marketing, Companies: Uber, General Electric",3
+"Jennifer Johnson, Business Analyst, Education: Master's in Business Administration, Columbia University, Skills: Communication, JavaScript, Google Analytics, Digital Marketing, Companies: Uber, McDonald's",2
+"Lisa Martinez, Sales Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Google Analytics, Digital Marketing, SQL, Leadership, Companies: Salesforce, General Electric",7
+"Michelle Williams, Operations Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Digital Marketing, CRM, Leadership, Java, Companies: General Electric, Oracle",9
+"John Miller, Marketing Manager, Education: Master's in Business Administration, Columbia University, Skills: Google Analytics, Tableau, Communication, AWS, Companies: IBM, Starbucks",3
+"Jennifer Martinez, Marketing Manager, Education: Bachelor's in Communications, New York University, Skills: Digital Marketing, Tableau, CRM, Strategic Planning, Companies: McDonald's, Oracle",10
+"Jennifer Garcia, Software Developer, Education: Bachelor's in Marketing, UCLA, Skills: Content Strategy, Digital Marketing, Python, JavaScript, Companies: Oracle, McDonald's",9
+"Elizabeth Johnson, Marketing Specialist, Education: Bachelor's in Marketing, UCLA, Skills: Leadership, CRM, Python, SQL, Companies: IBM, PepsiCo",5
+"John Miller, Content Writer, Education: Bachelor's in Marketing, Ohio State University, Skills: Strategic Planning, SEO/SEM, Tableau, Communication, Companies: Starbucks, Nike",6
+"Lisa Miller, Content Writer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Python, Content Strategy, Leadership, Digital Marketing, Companies: Salesforce, McDonald's",1
+"Elizabeth Johnson, Marketing Manager, Education: Master's in Data Science, MIT, Skills: AWS, Python, SQL, Google Analytics, Companies: McDonald's, HubSpot",4
+"Lisa Johnson, Business Analyst, Education: Bachelor's in Communications, University of Wisconsin, Skills: Strategic Planning, JavaScript, Content Strategy, Tableau, Companies: McDonald's, Starbucks",6
+"Michelle Williams, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: SEO/SEM, Communication, AWS, Strategic Planning, Companies: McDonald's, Nike",1
+"Jennifer Flores, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: Google Analytics, SEO/SEM, SQL, Content Strategy, Companies: Uber, General Electric",2
+"Jessica Flores, Content Writer, Education: Master's in Business Administration, Wharton, Skills: SQL, Python, Digital Marketing, Content Strategy, Companies: Salesforce, PepsiCo",9
+"Elizabeth Flores, Software Developer, Education: Bachelor's in Computer Science, University of Washington, Skills: Communication, Leadership, Content Strategy, Digital Marketing, Companies: Nike, Netflix",8
+"Daniel Jones, Sales Representative, Education: Master's in Business Administration, Wharton, Skills: Tableau, CRM, AWS, Python, Companies: Oracle, HubSpot",8
+"Christopher Miller, Marketing Specialist, Education: Master's in Business Administration, Wharton, Skills: Java, Strategic Planning, Tableau, SEO/SEM, Companies: Coca-Cola, Nike",1
+"Michelle Hill, Operations Manager, Education: Bachelor's in Marketing, UCLA, Skills: Google Analytics, JavaScript, Digital Marketing, Tableau, Companies: Uber, Starbucks",5
+"Daniel Jones, Customer Service Representative, Education: Master's in Data Science, MIT, Skills: SEO/SEM, Python, Digital Marketing, Content Strategy, Companies: Salesforce, IBM",6
+"Jennifer Williams, Software Engineer, Education: Master's in Business Administration, Columbia University, Skills: SEO/SEM, Digital Marketing, Google Analytics, Content Strategy, Companies: Uber, HubSpot",9
+"Jennifer Martinez, Operations Manager, Education: Master's in Computer Science, Stanford University, Skills: Communication, Java, Content Strategy, Digital Marketing, Companies: PepsiCo, HubSpot",9
+"Christopher Johnson, Software Engineer, Education: Master's in Data Science, MIT, Skills: Python, Digital Marketing, SEO/SEM, Java, Companies: Amazon, Google",2
+"John Martinez, Marketing Manager, Education: Master's in Data Science, MIT, Skills: Digital Marketing, AWS, SQL, CRM, Companies: Amazon, McDonald's",9
+"Robert Williams, Operations Manager, Education: Master's in Computer Science, Stanford University, Skills: SQL, Content Strategy, JavaScript, SEO/SEM, Companies: HubSpot, Salesforce",10
+"Daniel Hill, Customer Service Representative, Education: Master's in Computer Science, Stanford University, Skills: Google Analytics, Content Strategy, Strategic Planning, Digital Marketing, Companies: Coca-Cola, Nike",9
+"Elizabeth Johnson, Content Writer, Education: Bachelor's in Communications, University of Wisconsin, Skills: SQL, JavaScript, AWS, Communication, Companies: Salesforce, PepsiCo",5
+"Robert Williams, Operations Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Strategic Planning, SQL, Python, Java, Companies: Uber, Nike",4
+"John Flores, Software Engineer, Education: Master's in Business Administration, Columbia University, Skills: Python, Digital Marketing, SQL, Leadership, Companies: Google, Amazon",10
+"John Williams, Content Writer, Education: Bachelor's in Marketing, University of Chicago, Skills: SEO/SEM, Leadership, Digital Marketing, Strategic Planning, Companies: Netflix, McDonald's",10
+"Lisa Hill, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: JavaScript, Communication, CRM, AWS, Companies: PepsiCo, Netflix",9
+"John Garcia, Marketing Specialist, Education: Bachelor's in Marketing, UCLA, Skills: Tableau, Communication, SQL, SEO/SEM, Companies: Amazon, Google",6
+"Christopher Miller, Software Developer, Education: Bachelor's in Communications, New York University, Skills: JavaScript, AWS, Strategic Planning, Digital Marketing, Companies: McDonald's, Google",1
+"Daniel Miller, Customer Service Representative, Education: Bachelor's in Marketing, UCLA, Skills: AWS, Java, Content Strategy, Communication, Companies: Nike, Uber",9
+"Robert Jones, Business Analyst, Education: Bachelor's in Marketing, UCLA, Skills: CRM, Google Analytics, Tableau, AWS, Companies: Netflix, HubSpot",9
+"Michelle Jones, Content Writer, Education: Master's in Computer Science, Stanford University, Skills: Tableau, Java, SEO/SEM, JavaScript, Companies: Nike, Uber",9
+"Elizabeth Hill, Business Analyst, Education: Bachelor's in Computer Science, University of Washington, Skills: AWS, Tableau, Digital Marketing, SQL, Companies: Uber, Google",2
+"Elizabeth Martinez, Customer Service Representative, Education: Bachelor's in Marketing, Ohio State University, Skills: SEO/SEM, Leadership, CRM, Digital Marketing, Companies: Coca-Cola, Salesforce",1
+"Jessica Garcia, Sales Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Google Analytics, Digital Marketing, SQL, Java, Companies: Salesforce, McDonald's",1
+"Daniel Jones, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Communication, Java, SEO/SEM, SQL, Companies: Starbucks, Salesforce",2
+"Matthew Nguyen, Content Writer, Education: Master's in Data Science, MIT, Skills: Tableau, AWS, JavaScript, Python, Companies: HubSpot, McDonald's",1
+"Jessica Williams, Sales Representative, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, SEO/SEM, Java, Leadership, Companies: Google, Salesforce",4
+"Christopher Nguyen, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, SEO/SEM, Tableau, Java, Companies: Google, PepsiCo",5
+"Elizabeth Johnson, Operations Manager, Education: Master's in Computer Science, Stanford University, Skills: Google Analytics, Communication, Java, Content Strategy, Companies: Google, Coca-Cola",8
+"Elizabeth Flores, Business Analyst, Education: Bachelor's in Communications, University of Wisconsin, Skills: JavaScript, Communication, Digital Marketing, SEO/SEM, Companies: General Electric, Coca-Cola",5
+"Robert Miller, Sales Manager, Education: Master's in Business Administration, Columbia University, Skills: Content Strategy, SQL, SEO/SEM, CRM, Companies: Nike, PepsiCo",4
+"John Hill, Software Engineer, Education: Master's in Business Administration, Wharton, Skills: Python, SQL, Communication, JavaScript, Companies: HubSpot, Google",4
+"Robert Garcia, Sales Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, JavaScript, Tableau, SEO/SEM, Companies: McDonald's, Salesforce",7
+"Matthew Martinez, Customer Service Representative, Education: Bachelor's in Communications, University of Wisconsin, Skills: SQL, Java, Strategic Planning, Communication, Companies: Starbucks, Amazon",7
+"John Miller, Business Analyst, Education: Master's in Business Administration, Wharton, Skills: Communication, Python, SEO/SEM, Strategic Planning, Companies: General Electric, Oracle",1
+"Matthew Flores, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: SEO/SEM, SQL, Tableau, Java, Companies: General Electric, Amazon",3
+"Jennifer Jones, Customer Service Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Python, SEO/SEM, SQL, Java, Companies: Netflix, Amazon",5
+"Jennifer Flores, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: Tableau, Google Analytics, Communication, Content Strategy, Companies: General Electric, Oracle",5
+"Elizabeth Flores, Sales Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Communication, Strategic Planning, AWS, Python, Companies: Oracle, Starbucks",7
+"Daniel Garcia, Marketing Manager, Education: Bachelor's in Marketing, University of Chicago, Skills: Java, Tableau, Content Strategy, Strategic Planning, Companies: IBM, Uber",3
+"Jessica Williams, Sales Manager, Education: Master's in Computer Science, Stanford University, Skills: CRM, Communication, JavaScript, Python, Companies: McDonald's, IBM",9
+"Jessica Garcia, Marketing Specialist, Education: Bachelor's in Marketing, Ohio State University, Skills: Communication, Content Strategy, AWS, Java, Companies: General Electric, HubSpot",2
+"Christopher Hill, Operations Manager, Education: Master's in Business Administration, Columbia University, Skills: Leadership, JavaScript, Google Analytics, SEO/SEM, Companies: PepsiCo, Starbucks",6
+"Jennifer Williams, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: Communication, Java, JavaScript, Google Analytics, Companies: Nike, Google",3
+"John Hill, Marketing Specialist, Education: Bachelor's in Marketing, UCLA, Skills: CRM, Java, Content Strategy, Python, Companies: McDonald's, Starbucks",2
+"Matthew Brown, Operations Manager, Education: Master's in Data Science, MIT, Skills: SQL, Content Strategy, CRM, JavaScript, Companies: McDonald's, Salesforce",9
+"Michelle Johnson, Content Writer, Education: Bachelor's in Marketing, UCLA, Skills: AWS, Strategic Planning, Google Analytics, Tableau, Companies: PepsiCo, Oracle",3
+"Robert Flores, Software Developer, Education: Bachelor's in Marketing, University of Chicago, Skills: CRM, Digital Marketing, JavaScript, SEO/SEM, Companies: General Electric, Amazon",7
+"Daniel Nguyen, Business Analyst, Education: Bachelor's in Communications, New York University, Skills: JavaScript, Content Strategy, Tableau, Strategic Planning, Companies: Google, Nike",7
+"John Miller, Operations Manager, Education: Master's in Business Administration, Columbia University, Skills: Leadership, Tableau, SEO/SEM, JavaScript, Companies: HubSpot, Netflix",2
+"Elizabeth Martinez, Operations Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: SQL, JavaScript, Digital Marketing, Communication, Companies: IBM, McDonald's",1
+"John Johnson, Operations Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Digital Marketing, Strategic Planning, Tableau, JavaScript, Companies: IBM, Oracle",5
+"Jennifer Nguyen, Operations Manager, Education: Bachelor's in Communications, University of Wisconsin, Skills: Tableau, Leadership, AWS, CRM, Companies: Starbucks, Amazon",3
+"Matthew Williams, Marketing Manager, Education: Master's in Business Administration, Columbia University, Skills: Communication, AWS, Python, Java, Companies: Salesforce, Amazon",1
+"Jessica Nguyen, Marketing Specialist, Education: Bachelor's in Marketing, UCLA, Skills: Communication, Digital Marketing, JavaScript, Google Analytics, Companies: Netflix, Amazon",3
+"Elizabeth Garcia, Marketing Specialist, Education: Master's in Computer Science, Stanford University, Skills: CRM, Tableau, Strategic Planning, Communication, Companies: McDonald's, Coca-Cola",4
+"John Jones, Sales Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Tableau, SQL, CRM, Leadership, Companies: Uber, Nike",1
+"Lisa Miller, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: Digital Marketing, Python, Communication, SQL, Companies: Starbucks, Uber",1
+"Lisa Hill, Customer Service Representative, Education: Bachelor's in Marketing, University of Chicago, Skills: Strategic Planning, CRM, Google Analytics, Tableau, Companies: Starbucks, Nike",1
+"Daniel Flores, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: Python, SEO/SEM, Java, JavaScript, Companies: Netflix, General Electric",5
+"Robert Johnson, Software Developer, Education: Master's in Data Science, MIT, Skills: AWS, Content Strategy, JavaScript, Digital Marketing, Companies: Netflix, Coca-Cola",8
+"Lisa Nguyen, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Strategic Planning, JavaScript, CRM, Tableau, Companies: Salesforce, IBM",8
+"Lisa Johnson, Business Analyst, Education: Bachelor's in Computer Science, University of Washington, Skills: JavaScript, Digital Marketing, Communication, AWS, Companies: McDonald's, Salesforce",10
+"Matthew Martinez, Marketing Specialist, Education: Bachelor's in Computer Science, University of Washington, Skills: Strategic Planning, AWS, Google Analytics, Python, Companies: Netflix, Google",9
+"Jennifer Garcia, Sales Representative, Education: Master's in Data Science, MIT, Skills: Google Analytics, AWS, Communication, SEO/SEM, Companies: Oracle, Salesforce",2
+"Elizabeth Jones, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: JavaScript, CRM, Communication, Strategic Planning, Companies: Salesforce, Oracle",10
+"John Jones, Software Developer, Education: Bachelor's in Communications, New York University, Skills: Communication, Tableau, Digital Marketing, Google Analytics, Companies: Starbucks, PepsiCo",5
+"Robert Brown, Sales Representative, Education: Bachelor's in Communications, New York University, Skills: Google Analytics, CRM, Python, SEO/SEM, Companies: Coca-Cola, Amazon",1
+"Robert Jones, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: CRM, AWS, Communication, Leadership, Companies: Salesforce, Coca-Cola",1
+"Daniel Garcia, Content Writer, Education: Bachelor's in Computer Science, University of Washington, Skills: AWS, SQL, Tableau, Communication, Companies: Oracle, General Electric",2
+"Elizabeth Johnson, Software Engineer, Education: Master's in Data Science, MIT, Skills: Java, Google Analytics, Content Strategy, Python, Companies: HubSpot, Oracle",10
+"Michelle Miller, Software Engineer, Education: Bachelor's in Marketing, UCLA, Skills: Communication, AWS, Tableau, SEO/SEM, Companies: McDonald's, Uber",1
+"Michelle Flores, Software Engineer, Education: Bachelor's in Marketing, Ohio State University, Skills: SQL, CRM, Tableau, Java, Companies: IBM, Nike",2
+"Jessica Jones, Sales Manager, Education: Bachelor's in Communications, New York University, Skills: Content Strategy, SQL, SEO/SEM, Tableau, Companies: McDonald's, Uber",10
+"Daniel Hill, Business Analyst, Education: Bachelor's in Computer Science, University of Washington, Skills: Python, Leadership, Content Strategy, CRM, Companies: Netflix, PepsiCo",9
+"John Nguyen, Customer Service Representative, Education: Master's in Business Administration, Wharton, Skills: Google Analytics, AWS, Leadership, JavaScript, Companies: IBM, General Electric",8
+"Robert Martinez, Marketing Manager, Education: Master's in Business Administration, Wharton, Skills: Java, Tableau, SEO/SEM, Python, Companies: Netflix, Amazon",4
+"Lisa Hill, Sales Manager, Education: Bachelor's in Marketing, Ohio State University, Skills: Digital Marketing, Strategic Planning, SEO/SEM, Tableau, Companies: IBM, Starbucks",9
+"Jessica Williams, Operations Manager, Education: Master's in Data Science, MIT, Skills: Python, Content Strategy, Java, JavaScript, Companies: Starbucks, Oracle",5
+"Jessica Flores, Software Developer, Education: Bachelor's in Communications, New York University, Skills: SQL, SEO/SEM, Java, Leadership, Companies: Netflix, Coca-Cola",3
+"John Hill, Software Developer, Education: Bachelor's in Communications, University of Wisconsin, Skills: Content Strategy, Digital Marketing, SEO/SEM, Strategic Planning, Companies: HubSpot, Starbucks",3
+"John Miller, Marketing Manager, Education: Bachelor's in Computer Science, University of Washington, Skills: Google Analytics, Tableau, Strategic Planning, JavaScript, Companies: Netflix, Nike",4
+"Robert Hill, Marketing Specialist, Education: Master's in Business Administration, Columbia University, Skills: Java, Python, SQL, SEO/SEM, Companies: Nike, Amazon",7
+"Matthew Miller, Sales Manager, Education: Bachelor's in Marketing, UCLA, Skills: Communication, Google Analytics, Python, AWS, Companies: Starbucks, Salesforce",10
+"Jennifer Hill, Sales Manager, Education: Master's in Data Science, MIT, Skills: SEO/SEM, Leadership, Content Strategy, Tableau, Companies: Nike, IBM",7
+"Jessica Nguyen, Business Analyst, Education: Master's in Data Science, MIT, Skills: SEO/SEM, Python, Tableau, Content Strategy, Companies: PepsiCo, Oracle",1
