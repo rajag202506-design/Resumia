@@ -46,3 +46,9 @@ google-credentials.json
 next-env.d.ts
 
 /src/generated/prisma
+
+# Exclude microservices from main build (deploy separately)
+/open-resume
+/webcroller
+/resume_score
+/resume_ml_model

@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.env*
+*.log
+
+# Exclude other microservices from build
+open-resume
+webcroller
+resume_score
+resume_ml_model
