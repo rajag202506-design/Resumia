@@ -7,7 +7,11 @@ export default function JobSearch() {
   const [location, setLocation] = useState('');
   const [jobs, setJobs] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [searchStats, setSearchStats] = useState(null);
+  const [searchStats, setSearchStats] = useState<{
+    totalResults: number;
+    searchTimeMs: number;
+    jobsBySource: { [key: string]: number };
+  } | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (e: React.FormEvent) => {
