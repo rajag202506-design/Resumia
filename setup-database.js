@@ -5,11 +5,12 @@ const prisma = new PrismaClient();
 
 async function setupDatabase() {
   try {
-    console.log('Setting up database tables...');
+    console.log('🔧 Setting up database tables...');
+    console.log('Database URL:', process.env.DATABASE_URL ? 'Connected' : 'NOT SET!');
 
-    // The SQL from our migration file
+    // Create users table
+    console.log('Creating users table...');
     await prisma.$executeRawUnsafe(`
-      -- CreateTable
       CREATE TABLE IF NOT EXISTS "users" (
           "id" SERIAL NOT NULL,
           "name" VARCHAR(60) NOT NULL,
@@ -20,14 +21,18 @@ async function setupDatabase() {
           CONSTRAINT "users_pkey" PRIMARY KEY ("id")
       );
     `);
+    console.log('✓ Users table ready');
 
+    // Create unique index
+    console.log('Creating email index...');
     await prisma.$executeRawUnsafe(`
-      -- CreateIndex
       CREATE UNIQUE INDEX IF NOT EXISTS "users_email_key" ON "users"("email");
     `);
+    console.log('✓ Email index ready');
 
+    // Create resumes table
+    console.log('Creating resumes table...');
     await prisma.$executeRawUnsafe(`
-      -- CreateTable
       CREATE TABLE IF NOT EXISTS "resumes" (
           "id" SERIAL NOT NULL,
           "user_id" INTEGER NOT NULL,
@@ -45,9 +50,11 @@ async function setupDatabase() {
           CONSTRAINT "resumes_pkey" PRIMARY KEY ("id")
       );
     `);
+    console.log('✓ Resumes table ready');
 
+    // Add foreign key
+    console.log('Adding foreign key constraint...');
     await prisma.$executeRawUnsafe(`
-      -- AddForeignKey
       DO $$ BEGIN
         IF NOT EXISTS (
           SELECT 1 FROM pg_constraint WHERE conname = 'resumes_user_id_fkey'
@@ -58,17 +65,21 @@ async function setupDatabase() {
         END IF;
       END $$;
     `);
-
-    console.log('✅ Database tables created successfully!');
+    console.log('✓ Foreign key ready');
 
     // Verify tables exist
     const tables = await prisma.$queryRaw`
-      SELECT tablename FROM pg_tables WHERE schemaname = 'public';
+      SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY tablename;
     `;
-    console.log('Tables in database:', tables);
+    console.log('📋 Tables in database:', tables.map(t => t.tablename).join(', '));
+
+    console.log('✅ Database setup complete!');
+    process.exit(0);
 
   } catch (error) {
-    console.error('❌ Error setting up database:', error);
+    console.error('❌ Error setting up database:', error.message);
+    console.error('Full error:', error);
+    process.exit(1);
   } finally {
     await prisma.$disconnect();
   }
