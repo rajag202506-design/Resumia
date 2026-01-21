@@ -15,16 +15,24 @@ import axios from 'axios';
 export async function searchJobsWithRapidAPI(query, location) {
   const apiKey = process.env.RAPIDAPI_KEY;
 
+  console.log('🔧 Environment check:');
+  console.log('- USE_RAPIDAPI:', process.env.USE_RAPIDAPI);
+  console.log('- RAPIDAPI_KEY exists:', !!apiKey);
+  console.log('- RAPIDAPI_KEY length:', apiKey ? apiKey.length : 0);
+
   if (!apiKey) {
-    throw new Error('RAPIDAPI_KEY not configured in .env.local');
+    throw new Error('RAPIDAPI_KEY not configured in environment variables');
   }
 
   console.log(`🔍 Searching RapidAPI for: "${query}" in "${location}"`);
 
   try {
+    const searchQuery = `${query} in ${location}`;
+    console.log('📋 Search query:', searchQuery);
+
     const response = await axios.get('https://jsearch.p.rapidapi.com/search', {
       params: {
-        query: `${query} in ${location}`,
+        query: searchQuery,
         page: '1',
         num_pages: '1',
         date_posted: 'all',
@@ -36,9 +44,19 @@ export async function searchJobsWithRapidAPI(query, location) {
       timeout: 10000, // 10 second timeout
     });
 
+    console.log('📡 Response status:', response.status);
+    console.log('📦 Response data structure:', Object.keys(response.data));
+
     const jobs = response.data.data || [];
 
     console.log(`✅ RapidAPI (JSearch) returned ${jobs.length} jobs`);
+
+    if (jobs.length === 0) {
+      console.log('⚠️ No jobs found in RapidAPI response');
+      console.log('Full response:', JSON.stringify(response.data, null, 2));
+    } else {
+      console.log('📋 Sample job titles:', jobs.slice(0, 3).map(j => j.job_title));
+    }
 
     // Transform JSearch response to our format
     return jobs.map((job) => ({
@@ -63,10 +81,12 @@ export async function searchJobsWithRapidAPI(query, location) {
 
   } catch (error) {
     console.error('❌ RapidAPI search failed:', error.message);
+    console.error('Error type:', error.constructor.name);
 
     if (error.response) {
       console.error('Response status:', error.response.status);
-      console.error('Response data:', error.response.data);
+      console.error('Response headers:', error.response.headers);
+      console.error('Response data:', JSON.stringify(error.response.data, null, 2));
 
       if (error.response.status === 429) {
         throw new Error('RapidAPI rate limit exceeded. Please try again later.');
@@ -75,6 +95,15 @@ export async function searchJobsWithRapidAPI(query, location) {
       if (error.response.status === 403) {
         throw new Error('RapidAPI authentication failed. Check your API key.');
       }
+
+      if (error.response.status === 400) {
+        throw new Error('Invalid search parameters: ' + JSON.stringify(error.response.data));
+      }
+    } else if (error.request) {
+      console.error('Request was made but no response received');
+      console.error('Request details:', error.request);
+    } else {
+      console.error('Error setting up request:', error.message);
     }
 
     throw error;

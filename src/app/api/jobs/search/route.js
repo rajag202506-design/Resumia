@@ -19,6 +19,11 @@ const USE_MOCK_DATA = process.env.USE_MOCK_JOBS === 'true' || (!USE_RAPIDAPI && 
 
 export async function GET(request) {
   console.log('🔍 [Job Search API] Request received');
+  console.log('Environment configuration:');
+  console.log('- USE_RAPIDAPI:', process.env.USE_RAPIDAPI, '→', USE_RAPIDAPI);
+  console.log('- USE_MOCK_JOBS:', process.env.USE_MOCK_JOBS);
+  console.log('- RAPIDAPI_KEY exists:', !!process.env.RAPIDAPI_KEY);
+  console.log('- RAPIDAPI_KEY length:', process.env.RAPIDAPI_KEY ? process.env.RAPIDAPI_KEY.length : 0);
 
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('query');
