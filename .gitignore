@@ -47,8 +47,12 @@ next-env.d.ts
 
 /src/generated/prisma
 
+# Claude temp files
+tmpclaude-*-cwd
+
 # Exclude microservices from main build (deploy separately)
-/open-resume
-/webcroller
-/resume_score
-/resume_ml_model
+# Note: We keep them in git but exclude from Next.js build via next.config.ts
+# /open-resume
+# /webcroller
+# /resume_score
+# /resume_ml_model
