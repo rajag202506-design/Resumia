@@ -2,7 +2,7 @@
  * RapidAPI JSearch Integration
  * Fetches REAL jobs from Google, LinkedIn, Indeed, etc.
  * FREE tier: 150 requests/month
- * Returns up to 30 jobs per search (3 pages × 10 jobs)
+ * Returns 10 jobs per search to conserve API quota
  */
 
 import axios from 'axios';
