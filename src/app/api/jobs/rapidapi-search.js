@@ -35,14 +35,14 @@ export async function searchJobsWithRapidAPI(query, location) {
       params: {
         query: searchQuery,
         page: '1',
-        num_pages: '3', // Get 3 pages (10 jobs per page = 30 jobs total)
+        num_pages: '1',
         date_posted: 'all',
       },
       headers: {
         'X-RapidAPI-Key': apiKey,
         'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
       },
-      timeout: 15000, // 15 second timeout for multiple pages
+      timeout: 10000, // 10 second timeout
     });
 
     console.log('📡 Response status:', response.status);
