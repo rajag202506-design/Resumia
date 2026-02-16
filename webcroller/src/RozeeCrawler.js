@@ -10,110 +10,108 @@ export class RozeeCrawler extends BaseCrawler {
         const {
             keyword = '',
             location = '',
-            category = '',
-            experience = '',
-            salary = '',
-            jobType = '',
             page = 1
         } = searchParams;
 
-        const params = new URLSearchParams();
-        
-        if (keyword) params.set('q', keyword);
-        if (location) params.set('l', location);
-        if (category) params.set('c', category);
-        if (experience) params.set('e', experience);
-        if (salary) params.set('s', salary);
-        if (jobType) params.set('jt', jobType);
-        if (page > 1) params.set('p', page);
+        // Use the jsearch URL format that works
+        const query = keyword.replace(/\s+/g, '-').toLowerCase();
+        let url = `${this.baseUrl}/job/jsearch/q/${query}`;
 
-        return `${this.baseUrl}/jobs?${params.toString()}`;
+        if (page > 1) {
+            url += `/fpn/${page}`;
+        }
+
+        return url;
     }
 
     async extractJobData() {
         try {
-            await this.page.waitForSelector('.job-listing, .job-item, [data-job-id]', { timeout: 10000 });
-            
+            // Wait a bit for JavaScript to load
+            await this.page.waitForTimeout(3000);
+
             const jobs = await this.page.evaluate(() => {
-                const jobElements = document.querySelectorAll('.job-listing, .job-item, .job-tile, .job-card');
+                // Find all divs and articles that might contain jobs
+                const allElements = document.querySelectorAll('div, article, li');
                 const extractedJobs = [];
 
-                jobElements.forEach((jobElement) => {
-                    try {
-                        const titleElement = jobElement.querySelector('.job-title a, .title a, h3 a, h4 a');
-                        const companyElement = jobElement.querySelector('.company-name, .company, .employer');
-                        const locationElement = jobElement.querySelector('.location, .job-location');
-                        const salaryElement = jobElement.querySelector('.salary, .package, .compensation');
-                        const descriptionElement = jobElement.querySelector('.job-description, .description, .snippet');
-                        const linkElement = jobElement.querySelector('.job-title a, .title a, h3 a, h4 a');
-                        const dateElement = jobElement.querySelector('.date, .posted-date, .job-date');
-                        const typeElement = jobElement.querySelector('.job-type, .type');
+                allElements.forEach((el) => {
+                    const allText = el.innerText;
+                    if (!allText || allText.length < 50 || allText.length > 1000) return;
 
-                        const job = {
-                            title: titleElement?.textContent?.trim() || '',
-                            company: companyElement?.textContent?.trim() || '',
-                            location: locationElement?.textContent?.trim() || '',
-                            salary: salaryElement?.textContent?.trim() || '',
-                            description: descriptionElement?.textContent?.trim() || '',
-                            url: linkElement?.href || '',
-                            datePosted: dateElement?.textContent?.trim() || '',
-                            jobType: typeElement?.textContent?.trim() || ''
-                        };
+                    // Look for job indicators
+                    if (allText.toLowerCase().includes('engineer') ||
+                        allText.toLowerCase().includes('developer') ||
+                        allText.toLowerCase().includes('manager') ||
+                        allText.toLowerCase().includes('analyst')) {
 
-                        if (job.title && job.company) {
-                            extractedJobs.push(job);
+                        // Look for job title in heading or link
+                        const titleElem = el.querySelector('h2, h3, h4, a[href*="job"]');
+                        if (!titleElem) return;
+
+                        const title = titleElem.innerText.trim();
+                        if (!title || title.length < 5 || title.length > 100) return;
+
+                        // Skip filter/navigation elements
+                        if (title.toLowerCase().includes('filter') ||
+                            title.toLowerCase().includes('select one') ||
+                            title.toLowerCase().includes('experience level')) {
+                            return;
                         }
-                    } catch (error) {
-                        console.error('Error extracting job data:', error);
+
+                        // Look for company name
+                        const companyMatch = allText.match(/([A-Z][a-zA-Z\s&]+(?:Limited|Ltd|Inc|Corp|Software|Technologies|Solutions|Systems|Group|International)?)/);
+                        const company = companyMatch ? companyMatch[0].trim() : 'Not specified';
+
+                        // Look for location
+                        const locationMatch = allText.match(/(Karachi|Lahore|Islamabad|Rawalpindi|Faisalabad|Multan|Peshawar|Hyderabad|Quetta|All Cities|Multiple Cities)/i);
+                        const location = locationMatch ? locationMatch[0] : 'Pakistan';
+
+                        // Look for posted date
+                        const dateMatch = allText.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}/);
+                        const postedDate = dateMatch ? dateMatch[0] : '';
+
+                        // Get link
+                        const linkElem = el.querySelector('a[href*="rozee.pk"]');
+                        const url = linkElem ? linkElem.href : '';
+
+                        // Get description (first 200 chars)
+                        const description = allText.substring(0, 200).replace(/\n/g, ' ').trim();
+
+                        // Only add if we have essential fields
+                        if (title && title.length > 5 && url && url.includes('rozee.pk')) {
+                            extractedJobs.push({
+                                title,
+                                company,
+                                location,
+                                salary: '',
+                                description,
+                                url,
+                                datePosted: postedDate,
+                                jobType: ''
+                            });
+                        }
                     }
                 });
 
-                return extractedJobs;
-            });
-
-            return jobs.map(job => this.normalizeJobData(job));
-        } catch (error) {
-            this.logger.error(`Error extracting job data: ${error.message}`);
-            
-            try {
-                const alternativeJobs = await this.page.evaluate(() => {
-                    const jobElements = document.querySelectorAll('div[class*="job"], div[class*="listing"], tr[class*="job"]');
-                    const extractedJobs = [];
-
-                    jobElements.forEach((jobElement) => {
-                        try {
-                            const links = jobElement.querySelectorAll('a');
-                            const texts = Array.from(jobElement.querySelectorAll('*')).map(el => el.textContent?.trim()).filter(Boolean);
-                            
-                            if (texts.length > 2) {
-                                const job = {
-                                    title: texts[0] || '',
-                                    company: texts[1] || '',
-                                    location: texts.find(t => t.includes('Karachi') || t.includes('Lahore') || t.includes('Islamabad')) || '',
-                                    salary: texts.find(t => t.includes('Rs') || t.includes('PKR') || t.includes('salary')) || '',
-                                    description: texts.slice(2).join(' ').substring(0, 200) + '...' || '',
-                                    url: links[0]?.href || '',
-                                    datePosted: texts.find(t => t.includes('ago') || t.includes('day') || t.includes('hour')) || ''
-                                };
-
-                                if (job.title.length > 5 && job.company.length > 2) {
-                                    extractedJobs.push(job);
-                                }
-                            }
-                        } catch (error) {
-                            console.error('Error in alternative extraction:', error);
-                        }
-                    });
-
-                    return extractedJobs.slice(0, 20);
+                // Remove duplicates based on URL
+                const unique = [];
+                const seen = new Set();
+                extractedJobs.forEach(job => {
+                    if (!seen.has(job.url)) {
+                        seen.add(job.url);
+                        unique.push(job);
+                    }
                 });
 
-                this.logger.info(`Alternative extraction found ${alternativeJobs.length} jobs`);
-                return alternativeJobs.map(job => this.normalizeJobData(job));
-            } catch (altError) {
-                this.logger.error(`Alternative extraction also failed: ${altError.message}`);
-                return [];
-            }
+                return unique.slice(0, 10); // Return max 10 jobs
+            });
+
+            this.logger.info(`Extracted ${jobs.length} jobs from page`);
+            return jobs.map(job => this.normalizeJobData(job));
+
+        } catch (error) {
+            this.logger.error(`Error extracting job data: ${error.message}`);
+            return [];
         }
     }
 
