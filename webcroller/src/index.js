@@ -17,8 +17,8 @@ async function main() {
         const searchParams = {
             keyword: process.argv[2] || 'software engineer',
             location: process.argv[3] || 'Pakistan',
-            sources: ['indeed', 'rozee'], 
-            maxPages: 3,
+            sources: ['rozee', 'jobsalert', 'mustakbil'],
+            maxPages: 2,
             filters: {},
             sortBy: 'datePosted'
         };
