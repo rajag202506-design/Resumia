@@ -36,9 +36,9 @@ export class BaseCrawler {
 
     async initialize() {
         try {
-            this.logger.info('Initializing browser...');
+            this.logger.info('Initializing browser with anti-detection...');
             this.browser = await puppeteer.launch({
-                headless: this.options.headless,
+                headless: "new", // Use new headless mode
                 slowMo: this.options.slowMo,
                 protocolTimeout: 60000,
                 args: [
@@ -49,30 +49,77 @@ export class BaseCrawler {
                     '--no-first-run',
                     '--no-zygote',
                     '--disable-gpu',
-                    '--disable-web-security',
-                    '--disable-features=VizDisplayCompositor'
+                    '--disable-blink-features=AutomationControlled', // Hide automation
+                    '--disable-features=VizDisplayCompositor',
+                    '--window-size=1920,1080'
                 ]
             });
 
             this.page = await this.browser.newPage();
-            
-            const userAgent = new UserAgent();
-            await this.page.setUserAgent(userAgent.toString());
-            
-            await this.page.setViewport({ width: 1366, height: 768 });
-            
+
+            // Use realistic desktop user agent
+            await this.page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+
+            await this.page.setViewport({ width: 1920, height: 1080 });
+
+            // Remove webdriver flag and other detection signals
+            await this.page.evaluateOnNewDocument(() => {
+                // Overwrite the `navigator.webdriver` property
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => false,
+                });
+
+                // Overwrite the `plugins` property
+                Object.defineProperty(navigator, 'plugins', {
+                    get: () => [1, 2, 3, 4, 5],
+                });
+
+                // Overwrite the `languages` property
+                Object.defineProperty(navigator, 'languages', {
+                    get: () => ['en-US', 'en'],
+                });
+
+                // Mock Chrome runtime
+                window.chrome = {
+                    runtime: {},
+                };
+
+                // Mock permissions
+                const originalQuery = window.navigator.permissions.query;
+                window.navigator.permissions.query = (parameters) => (
+                    parameters.name === 'notifications' ?
+                        Promise.resolve({ state: Notification.permission }) :
+                        originalQuery(parameters)
+                );
+            });
+
+            // Set extra HTTP headers
+            await this.page.setExtraHTTPHeaders({
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Cache-Control': 'max-age=0'
+            });
+
+            // Block unnecessary resources to speed up
             await this.page.setRequestInterception(true);
             this.page.on('request', (req) => {
-                if (req.resourceType() === 'stylesheet' || 
+                if (req.resourceType() === 'stylesheet' ||
                     req.resourceType() === 'image' ||
-                    req.resourceType() === 'font') {
+                    req.resourceType() === 'font' ||
+                    req.resourceType() === 'media') {
                     req.abort();
                 } else {
                     req.continue();
                 }
             });
 
-            this.logger.info('Browser initialized successfully');
+            this.logger.info('Browser initialized successfully with anti-detection');
             return true;
         } catch (error) {
             this.logger.error(`Failed to initialize browser: ${error.message}`);
@@ -83,17 +130,40 @@ export class BaseCrawler {
     async navigateToPage(url, retries = 0) {
         try {
             this.logger.info(`Navigating to: ${url}`);
+
+            // Navigate with longer timeout
             await this.page.goto(url, {
-                waitUntil: 'domcontentloaded',
-                timeout: this.options.timeout
+                waitUntil: 'networkidle2',
+                timeout: 30000
             });
-            
-            await this.randomDelay();
+
+            // Wait for page to fully load
+            await this.page.waitForTimeout(3000 + Math.random() * 2000);
+
+            // Simulate human-like scrolling
+            await this.page.evaluate(() => {
+                window.scrollBy(0, Math.floor(Math.random() * 300));
+            });
+
+            await this.page.waitForTimeout(1000 + Math.random() * 1000);
+
+            // Check if we got blocked
+            const pageTitle = await this.page.title();
+            const pageText = await this.page.evaluate(() => document.body.innerText.toLowerCase());
+
+            if (pageTitle.toLowerCase().includes('blocked') ||
+                pageText.includes('cloudflare') ||
+                pageText.includes('request blocked') ||
+                pageText.includes('access denied')) {
+                throw new Error('Page blocked by anti-bot protection');
+            }
+
+            this.logger.info('Page loaded successfully');
             return true;
         } catch (error) {
             if (retries < this.options.maxRetries) {
                 this.logger.warn(`Navigation failed, retrying... (${retries + 1}/${this.options.maxRetries})`);
-                await this.delay(this.options.delay * (retries + 1));
+                await this.delay(5000 + Math.random() * 5000); // Longer delay before retry
                 return this.navigateToPage(url, retries + 1);
             }
             this.logger.error(`Failed to navigate to ${url}: ${error.message}`);
