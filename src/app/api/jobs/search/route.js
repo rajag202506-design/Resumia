@@ -2,6 +2,7 @@ import { JobServiceClient } from '@google-cloud/talent';
 import { NextResponse } from 'next/server';
 import { searchMockJobs } from '../mock-data';
 import { searchJobsWithRapidAPI } from '../rapidapi-search';
+import { searchJobsWithWebCrawler, isWebCrawlerAvailable } from '../webcrawler-search';
 
 // Initialize JobServiceClient with credentials
 let jobServiceClient;
@@ -14,16 +15,17 @@ try {
 }
 
 // Check which job source to use
+const USE_WEBCRAWLER = process.env.USE_WEBCRAWLER === 'true';
 const USE_RAPIDAPI = process.env.USE_RAPIDAPI === 'true';
-const USE_MOCK_DATA = process.env.USE_MOCK_JOBS === 'true' || (!USE_RAPIDAPI && !process.env.GOOGLE_CLOUD_TENANT_ID);
+const USE_MOCK_DATA = process.env.USE_MOCK_JOBS === 'true' || (!USE_RAPIDAPI && !USE_WEBCRAWLER && !process.env.GOOGLE_CLOUD_TENANT_ID);
 
 export async function GET(request) {
   console.log('🔍 [Job Search API] Request received');
   console.log('Environment configuration:');
+  console.log('- USE_WEBCRAWLER:', process.env.USE_WEBCRAWLER, '→', USE_WEBCRAWLER);
   console.log('- USE_RAPIDAPI:', process.env.USE_RAPIDAPI, '→', USE_RAPIDAPI);
   console.log('- USE_MOCK_JOBS:', process.env.USE_MOCK_JOBS);
   console.log('- RAPIDAPI_KEY exists:', !!process.env.RAPIDAPI_KEY);
-  console.log('- RAPIDAPI_KEY length:', process.env.RAPIDAPI_KEY ? process.env.RAPIDAPI_KEY.length : 0);
 
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('query');
@@ -38,7 +40,59 @@ export async function GET(request) {
     }, { status: 400 });
   }
 
-  // Use RapidAPI if enabled
+  // Use Web Crawler if enabled (PRIORITY #1)
+  if (USE_WEBCRAWLER) {
+    console.log('🕷️  Using Web Crawler for REAL job data from Pakistani sites');
+
+    try {
+      const crawlerAvailable = await isWebCrawlerAvailable();
+
+      if (!crawlerAvailable) {
+        throw new Error('Web crawler not installed');
+      }
+
+      const crawlerJobs = await searchJobsWithWebCrawler(query, location);
+
+      console.log(`✅ Found ${crawlerJobs.length} real jobs from Web Crawler`);
+
+      return NextResponse.json({
+        matchingJobs: crawlerJobs,
+        source: 'webcrawler',
+        sources: ['Rozee.pk', 'JobsAlert.pk', 'Mustakbil.com'],
+        message: crawlerJobs.length === 0 ? 'No jobs found for your search criteria' : undefined
+      });
+
+    } catch (crawlerError) {
+      console.error('❌ Web Crawler failed:', crawlerError.message);
+
+      // Fallback to RapidAPI if available
+      if (USE_RAPIDAPI) {
+        console.log('💡 Falling back to RapidAPI...');
+        try {
+          const rapidAPIJobs = await searchJobsWithRapidAPI(query, location);
+          return NextResponse.json({
+            matchingJobs: rapidAPIJobs,
+            source: 'rapidapi',
+            warning: 'Web crawler unavailable, using RapidAPI: ' + crawlerError.message
+          });
+        } catch (rapidError) {
+          // Continue to mock data fallback below
+        }
+      }
+
+      // Fallback to mock data if crawler fails
+      console.log('💡 Falling back to mock data...');
+      const mockJobs = searchMockJobs(query, location);
+
+      return NextResponse.json({
+        matchingJobs: mockJobs,
+        source: 'mock',
+        warning: 'Web crawler unavailable, using sample data: ' + crawlerError.message
+      });
+    }
+  }
+
+  // Use RapidAPI if enabled (PRIORITY #2)
   if (USE_RAPIDAPI) {
     console.log('🚀 Using RapidAPI for REAL job data');
 
