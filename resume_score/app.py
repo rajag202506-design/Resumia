@@ -159,30 +159,140 @@ def extract_keywords(text, processed_text):
 
     return keywords
 
-# Generate suggestions
-def suggest_improvements(processed_text, score):
+# Analyze resume content for specific suggestions
+def analyze_resume_content(text, keywords, contact_info):
+    """Deep analysis of resume content to generate specific suggestions"""
+    text_lower = text.lower()
+    words = text.split()
+
+    analysis = {
+        'has_quantifiable_achievements': bool(re.findall(r'\d+%|\$\d+|increased|decreased|improved|reduced|saved', text_lower)),
+        'has_action_verbs': any(verb in text_lower for verb in ['developed', 'implemented', 'managed', 'led', 'created', 'designed', 'built', 'achieved']),
+        'has_weak_verbs': any(verb in text_lower for verb in ['responsible for', 'duties included', 'worked on', 'helped with']),
+        'has_experience_section': 'experience' in text_lower or 'work history' in text_lower,
+        'has_education_section': 'education' in text_lower or 'degree' in text_lower or 'university' in text_lower,
+        'has_skills_section': 'skills' in text_lower or 'technical skills' in text_lower,
+        'has_summary': 'summary' in text_lower or 'objective' in text_lower or 'profile' in text_lower,
+        'has_projects': 'project' in text_lower,
+        'has_certifications': 'certif' in text_lower or 'license' in text_lower,
+        'word_count': len(words),
+        'technical_skills_count': len(keywords),
+        'has_email': len(contact_info['emails']) > 0,
+        'has_phone': len(contact_info['phones']) > 0,
+        'has_linkedin': len(contact_info['linkedin']) > 0,
+        'has_passive_voice': bool(re.findall(r'\b(was|were|been|being)\s+\w+ed\b', text_lower)),
+        'sentence_length': len(words) / max(len(re.findall(r'[.!?]+', text)), 1),
+        'has_buzzwords': any(word in text_lower for word in ['synergy', 'leverage', 'paradigm', 'disruptive', 'rockstar']),
+    }
+
+    return analysis
+
+# Generate specific, actionable suggestions
+def suggest_improvements(text, processed_text, score, keywords, contact_info, issues):
+    """Generate specific, actionable suggestions based on actual resume content"""
     suggestions = []
+    content_analysis = analyze_resume_content(text, keywords, contact_info)
 
-    missing_keywords = [kw for kw in important_words[:10] if kw not in processed_text]
+    # SPECIFIC SUGGESTIONS BASED ON ACTUAL CONTENT
 
-    if score < 5:
-        suggestions.append("Resume needs significant improvement - consider professional resume writing services")
-        suggestions.append("Add more quantifiable achievements and results")
-        suggestions.append("Include relevant technical skills and certifications")
+    # 1. Contact Information Improvements (HIGHEST PRIORITY)
+    if not content_analysis['has_email']:
+        suggestions.append("✉️ ADD: Include your professional email address at the top (e.g., yourname@email.com)")
+
+    if not content_analysis['has_phone']:
+        suggestions.append("📱 ADD: Add your phone number in a standard format (e.g., +92-XXX-XXXXXXX)")
+
+    if not content_analysis['has_linkedin']:
+        suggestions.append("🔗 ADD: Include your LinkedIn profile URL (linkedin.com/in/yourname)")
+
+    # 2. Missing Critical Sections
+    if not content_analysis['has_experience_section']:
+        suggestions.append("💼 ADD SECTION: Create a 'Work Experience' or 'Professional Experience' section with your job history")
+
+    if not content_analysis['has_education_section']:
+        suggestions.append("🎓 ADD SECTION: Include 'Education' section with your degree, university, and graduation year")
+
+    if not content_analysis['has_skills_section']:
+        suggestions.append("⚙️ ADD SECTION: Create a 'Skills' or 'Technical Skills' section listing your competencies")
+
+    if not content_analysis['has_summary'] and score >= 6:
+        suggestions.append("📝 ADD: Include a brief professional summary (2-3 sentences) at the top highlighting your expertise")
+
+    # 3. Quantifiable Achievements (CRITICAL FOR HIGH SCORES)
+    if not content_analysis['has_quantifiable_achievements']:
+        suggestions.append("📊 IMPROVE: Add measurable achievements (e.g., 'Increased sales by 30%', 'Managed team of 5', 'Reduced costs by $10K')")
     elif score < 7:
-        suggestions.append("Good resume, but can be improved with more specific details")
-        suggestions.append("Add measurable achievements (numbers, percentages, metrics)")
-    else:
-        suggestions.append("Excellent resume! Just minor tweaks needed")
+        suggestions.append("📈 EXPAND: Add more quantifiable results - include percentages, dollar amounts, team sizes, or time saved")
 
-    if missing_keywords:
-        suggestions.append(f"Consider adding relevant keywords: {', '.join(missing_keywords[:5])}")
+    # 4. Action Verbs Improvements
+    if content_analysis['has_weak_verbs'] and not content_analysis['has_action_verbs']:
+        suggestions.append("💪 REPLACE: Change weak phrases ('responsible for', 'worked on') to strong action verbs ('Led', 'Developed', 'Implemented', 'Achieved')")
+    elif not content_analysis['has_action_verbs']:
+        suggestions.append("🎯 IMPROVE: Start each bullet point with strong action verbs (Developed, Managed, Led, Created, Designed, Implemented)")
 
-    suggestions.append("Use strong action verbs (developed, implemented, managed, led)")
-    suggestions.append("Tailor your resume to match the job description")
-    suggestions.append("Keep resume concise and well-formatted")
+    # 5. Technical Skills Enhancement
+    if content_analysis['technical_skills_count'] < 5:
+        missing_skills = []
+        common_skills = ['Python', 'JavaScript', 'SQL', 'React', 'Node.js', 'AWS', 'Git', 'Docker', 'MongoDB', 'Java']
+        for skill in common_skills:
+            if skill.lower() not in text.lower():
+                missing_skills.append(skill)
 
-    return suggestions[:8]
+        if missing_skills:
+            suggestions.append(f"🔧 ADD SKILLS: If applicable, include these in-demand skills: {', '.join(missing_skills[:5])}")
+    elif content_analysis['technical_skills_count'] < 10:
+        suggestions.append("🚀 EXPAND: Add more technical skills if you have them (frameworks, tools, platforms, programming languages)")
+
+    # 6. Projects Section
+    if not content_analysis['has_projects'] and score < 7:
+        suggestions.append("💡 ADD SECTION: Include a 'Projects' section showcasing 2-3 relevant projects with technologies used")
+
+    # 7. Certifications
+    if not content_analysis['has_certifications'] and score < 8:
+        suggestions.append("🏆 ADD: Include any relevant certifications (AWS, Google Cloud, Microsoft, etc.) if you have them")
+
+    # 8. Length Optimization
+    if content_analysis['word_count'] < 200:
+        suggestions.append(f"📄 EXPAND: Your resume is too brief ({content_analysis['word_count']} words). Aim for 400-600 words with detailed descriptions")
+    elif content_analysis['word_count'] > 800:
+        suggestions.append(f"✂️ CONDENSE: Your resume is too long ({content_analysis['word_count']} words). Remove less relevant details and keep it under 600 words")
+
+    # 9. Passive Voice Detection
+    if content_analysis['has_passive_voice']:
+        suggestions.append("✍️ REWRITE: Convert passive voice ('was responsible for') to active voice ('Led', 'Managed', 'Developed')")
+
+    # 10. Avoid Buzzwords
+    if content_analysis['has_buzzwords']:
+        suggestions.append("⚠️ REMOVE: Replace vague buzzwords ('synergy', 'rockstar') with specific achievements and technical skills")
+
+    # 11. Missing Keywords from High-Quality Resumes
+    if important_words:
+        missing_keywords = [kw for kw in important_words[:15] if kw not in processed_text]
+        if missing_keywords and len(missing_keywords) > 3:
+            suggestions.append(f"🔑 KEYWORDS: Consider adding these industry-standard terms if relevant: {', '.join(missing_keywords[:6])}")
+
+    # 12. Sentence Length Optimization
+    if content_analysis['sentence_length'] > 25:
+        suggestions.append("📝 SIMPLIFY: Break down long sentences into shorter, clearer statements (aim for 15-20 words per sentence)")
+
+    # 13. Score-Specific Guidance
+    if score < 4:
+        suggestions.append("🔴 CRITICAL: Your resume needs major improvements. Focus on adding quantifiable achievements, technical skills, and proper structure")
+    elif score < 6:
+        suggestions.append("🟡 MODERATE: Good foundation, but needs more specific details, metrics, and professional formatting")
+    elif score >= 8:
+        suggestions.append("🟢 EXCELLENT: Strong resume! Fine-tune with additional metrics and ensure ATS compatibility")
+
+    # 14. ATS Optimization
+    if score >= 6:
+        suggestions.append("🤖 ATS TIP: Use standard section headers ('Work Experience', 'Education', 'Skills') for applicant tracking systems")
+
+    # 15. Format and Structure
+    if not any('section' in s.lower() for s in suggestions[:5]):
+        suggestions.append("📋 FORMAT: Use clear section headers, bullet points, and consistent formatting throughout")
+
+    # Return prioritized suggestions (max 10 most relevant)
+    return suggestions[:10]
 
 # Generate issues
 def detect_issues(text, contact_info, keywords):
@@ -239,8 +349,8 @@ def analyze_resume_text(text):
         # Detect issues
         issues = detect_issues(text, contact_info, keywords)
 
-        # Generate suggestions
-        suggestions = suggest_improvements(processed, ml_score)
+        # Generate specific suggestions based on actual content
+        suggestions = suggest_improvements(text, processed, ml_score, keywords, contact_info, issues)
 
         # Calculate metrics
         word_count = len(text.split())
