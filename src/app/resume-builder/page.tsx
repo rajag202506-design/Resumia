@@ -8,7 +8,7 @@ export default function ResumeBuilderPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Open-resume URL - change this based on deployment
-  const RESUME_BUILDER_URL = process.env.NEXT_PUBLIC_RESUME_BUILDER_URL || 'http://localhost:3001';
+  const RESUME_BUILDER_URL = process.env.NEXT_PUBLIC_RESUME_BUILDER_URL || process.env.RAILWAY_SERVICE_RESUME_BUILDER_URL || 'http://localhost:3001';
 
   useEffect(() => {
     // Check if open-resume is running

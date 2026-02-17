@@ -6,7 +6,7 @@ import PDFParse from 'pdf-parse';
 import mammoth from 'mammoth';
 
 const prisma = new PrismaClient();
-const FLASK_API_URL = process.env.FLASK_ML_API_URL || 'http://localhost:5000';
+const FLASK_API_URL = process.env.FLASK_ML_API_URL || process.env.RAILWAY_SERVICE_ML_API_URL || 'http://localhost:5000';
 
 // Simple text extraction functions - using same approach as working parse-resume route
 async function extractTextFromPDF(buffer) {
