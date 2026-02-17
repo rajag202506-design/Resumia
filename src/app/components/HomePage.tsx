@@ -387,7 +387,7 @@ export default function HomePageContent() {
               </div>
 
               {/* Other Navigation Items */}
-              <a href="http://localhost:3001" target="_blank" rel="noopener noreferrer" className="block">
+              <Link href="/resume-builder" className="block">
                 <div className="flex items-center p-3 rounded-xl hover:bg-white/10 transition-colors">
                   <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -396,7 +396,7 @@ export default function HomePageContent() {
                   </div>
                   <span className="font-medium text-white/80 hover:text-white">Customize Resume</span>
                 </div>
-              </a>
+              </Link>
 
               <Link href="/job-search" className="block">
                 <div className="flex items-center p-3 rounded-xl hover:bg-white/10 transition-colors">
