@@ -174,13 +174,41 @@ export async function POST(request) {
 
     const mlAnalysis = flaskResponse.data.analysis;
 
+    // Transform skills to keywords format for frontend compatibility
+    const keywordsFromSkills = {};
+    if (mlAnalysis.all_skills) {
+      mlAnalysis.all_skills.forEach(skill => {
+        keywordsFromSkills[skill] = 1;
+      });
+    }
+    // Also add any existing keywords
+    if (mlAnalysis.keywords) {
+      Object.assign(keywordsFromSkills, mlAnalysis.keywords);
+    }
+
+    // Transform suggestions from objects to strings for frontend
+    const suggestionsAsStrings = (mlAnalysis.suggestions || []).map(s => {
+      if (typeof s === 'string') return s;
+      // Format: [PRIORITY] suggestion text
+      const priorityIcon = s.priority === 'critical' ? '🔴' : s.priority === 'high' ? '🟠' : s.priority === 'medium' ? '🟡' : '🟢';
+      return `${priorityIcon} ${s.suggestion}`;
+    });
+
     // Enhance the Flask response with additional metadata
     const enhancedAnalysis = {
-      ...mlAnalysis,
-      mlAnalysisMethod: 'Flask ML API',
+      score: mlAnalysis.score,
+      keywords: keywordsFromSkills,
+      contactInfo: mlAnalysis.contactInfo || { emails: [], phones: [], linkedin: [], github: [] },
+      issues: mlAnalysis.issues || [],
+      suggestions: suggestionsAsStrings,
+      strengths: mlAnalysis.strengths || [],
+      skills: mlAnalysis.skills || {},
+      sections: mlAnalysis.sections || {},
+      score_breakdown: mlAnalysis.score_breakdown || {},
+      experience_quality: mlAnalysis.experience_quality || {},
+      mlAnalysisMethod: 'Flask ML API v3.0',
       mlAnalyzedAt: new Date().toISOString(),
-      apiVersion: 'v1.0',
-      // Map analysis_summary fields to top level for frontend compatibility
+      apiVersion: 'v3.0',
       wordCount: mlAnalysis.analysis_summary?.word_count || 0,
       textLength: mlAnalysis.analysis_summary?.character_count || 0
     };
