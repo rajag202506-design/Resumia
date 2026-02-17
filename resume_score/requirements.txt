@@ -4,6 +4,6 @@ pandas
 scikit-learn
 nltk
 joblib
-pdfminer.six
-docx2txt
-textract
+PyMuPDF
+numpy
+gunicorn
