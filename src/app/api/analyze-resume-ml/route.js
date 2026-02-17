@@ -6,7 +6,7 @@ import PDFParse from 'pdf-parse';
 import mammoth from 'mammoth';
 
 const prisma = new PrismaClient();
-const FLASK_API_URL = 'http://localhost:5000';
+const FLASK_API_URL = process.env.FLASK_ML_API_URL || 'http://localhost:5000';
 
 // Simple text extraction functions - using same approach as working parse-resume route
 async function extractTextFromPDF(buffer) {
@@ -167,7 +167,8 @@ export async function POST(request) {
       return new Response(JSON.stringify({
         error: 'ML analysis service unavailable',
         details: errorMessage,
-        suggestion: 'Please ensure Flask ML API is running on localhost:5000'
+        suggestion: 'The ML Flask API is not deployed on Railway. For ML scoring, run the Flask API locally at localhost:5000. Alternatively, use the ChatGPT-powered analysis which is already working.',
+        fallbackOption: 'Use ChatGPT analysis available in the dashboard'
       }), { status: 503, headers });
     }
 
