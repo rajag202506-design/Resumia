@@ -1,89 +1,129 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function ResumeBuilderPage() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Open-resume URL - change this based on deployment
+  const RESUME_BUILDER_URL = process.env.NEXT_PUBLIC_RESUME_BUILDER_URL || 'http://localhost:3001';
 
   useEffect(() => {
-    // Redirect to the Open Resume builder or show a coming soon message
-    // For now, we'll show a message that it's in development
-    console.log('Resume Builder Page Loaded');
+    // Check if open-resume is running
+    fetch(RESUME_BUILDER_URL)
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   }, []);
 
+  const openInNewTab = () => {
+    window.open(RESUME_BUILDER_URL, '_blank');
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-4xl w-full bg-white rounded-2xl shadow-2xl p-8 md:p-12">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-6">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Resume Builder
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-gray-600">
             Create professional resumes with our advanced builder
           </p>
+        </div>
 
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-8">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <svg
-                  className="h-6 w-6 text-yellow-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+        {/* Main Content */}
+        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+          {/* Instructions */}
+          <div className="bg-gradient-to-r from-blue-500 to-indigo-600 p-6 text-white">
+            <h2 className="text-2xl font-bold mb-2">📝 Interactive Resume Builder</h2>
+            <p className="text-blue-100">
+              Build your resume with real-time preview and professional templates
+            </p>
+          </div>
+
+          <div className="p-8">
+            {/* Option 1: Embedded iframe */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Option 1: Embedded Builder (Recommended)
+              </h3>
+              <div className="border-4 border-gray-200 rounded-lg overflow-hidden" style={{ height: '600px' }}>
+                <iframe
+                  src={RESUME_BUILDER_URL}
+                  className="w-full h-full"
+                  title="Resume Builder"
+                  onError={() => setIsLoading(true)}
+                />
+              </div>
+              {isLoading && (
+                <div className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                  <p className="text-yellow-700">
+                    <strong>Note:</strong> The resume builder service needs to be running separately.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Option 2: Open in new tab */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Option 2: Open in New Tab
+              </h3>
+              <button
+                onClick={openInNewTab}
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-lg font-semibold shadow-lg transition-all transform hover:scale-105"
+              >
+                🚀 Open Resume Builder in New Tab
+              </button>
+              <p className="text-sm text-gray-500 mt-2">
+                Opens the resume builder in a new window for better experience
+              </p>
+            </div>
+
+            {/* Option 3: Alternative tools */}
+            <div className="border-t pt-8">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Other Resume Tools
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <button
+                  onClick={() => router.push('/dashboard')}
+                  className="bg-blue-50 hover:bg-blue-100 p-6 rounded-lg border-2 border-blue-200 transition text-left"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm text-yellow-700">
-                  <strong>Note:</strong> The resume builder is currently running as a separate service.
-                  For the full resume building experience with templates, please contact support.
-                </p>
+                  <h4 className="font-bold text-lg text-blue-900 mb-2">📤 Upload & Analyze</h4>
+                  <p className="text-blue-700">
+                    Upload your existing resume and get AI-powered feedback
+                  </p>
+                </button>
+
+                <button
+                  onClick={() => router.push('/parse-resume')}
+                  className="bg-green-50 hover:bg-green-100 p-6 rounded-lg border-2 border-green-200 transition text-left"
+                >
+                  <h4 className="font-bold text-lg text-green-900 mb-2">🔍 Parse Resume</h4>
+                  <p className="text-green-700">
+                    Extract structured data from your resume automatically
+                  </p>
+                </button>
               </div>
             </div>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-blue-50 rounded-xl p-6">
-              <h3 className="font-bold text-lg text-blue-900 mb-2">Upload & Analyze</h3>
-              <p className="text-blue-700 mb-4">
-                Upload your existing resume and get AI-powered feedback
-              </p>
+            {/* Back button */}
+            <div className="mt-8 text-center">
               <button
-                onClick={() => router.push('/dashboard')}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
+                onClick={() => router.push('/')}
+                className="text-gray-600 hover:text-gray-900 underline"
               >
-                Go to Dashboard
+                ← Back to Home
               </button>
             </div>
-
-            <div className="bg-green-50 rounded-xl p-6">
-              <h3 className="font-bold text-lg text-green-900 mb-2">Parse Resume</h3>
-              <p className="text-green-700 mb-4">
-                Extract information from your resume automatically
-              </p>
-              <button
-                onClick={() => router.push('/parse-resume')}
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition"
-              >
-                Parse Resume
-              </button>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <button
-              onClick={() => router.push('/')}
-              className="text-gray-600 hover:text-gray-900 underline"
-            >
-              ← Back to Home
-            </button>
           </div>
         </div>
       </div>
