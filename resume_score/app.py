@@ -27,363 +27,732 @@ except:
     STOPWORDS = set()
     logger.warning("NLTK stopwords not available")
 
-# Load trained model and vectorizer
-MODEL_PATH = 'models/resume_model.pkl'
-VECTORIZER_PATH = 'models/vectorizer.pkl'
+def preprocess(text):
+    text = text.lower()
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    tokens = text.split()
+    tokens = [t for t in tokens if t not in STOPWORDS and t.isalpha()]
+    return " ".join(tokens)
 
-try:
-    model = joblib.load(MODEL_PATH)
-    vectorizer = joblib.load(VECTORIZER_PATH)
-    logger.info("✅ ML Model and Vectorizer loaded successfully")
-except Exception as e:
-    logger.error(f"❌ Failed to load ML model: {e}")
-    model = None
-    vectorizer = None
-
-# Load training data for keyword extraction
-TRAINING_DATA_PATH = 'data/processed/training_dataa.csv'
-HIGH_SCORE_THRESHOLD = 8
-
-try:
-    training_df = pd.read_csv(TRAINING_DATA_PATH)
-    high_quality_resumes = training_df[training_df['score'] >= HIGH_SCORE_THRESHOLD]['text'].tolist()
-
-    def preprocess(text):
-        text = text.lower()
-        text = text.translate(str.maketrans('', '', string.punctuation))
-        tokens = text.split()
-        tokens = [t for t in tokens if t not in STOPWORDS and t.isalpha()]
-        return " ".join(tokens)
-
-    high_quality_processed = [preprocess(r) for r in high_quality_resumes]
-
-    # Extract keywords from high-quality resumes
-    temp_vectorizer = TfidfVectorizer(max_features=50)
-    top_features_matrix = temp_vectorizer.fit_transform(high_quality_processed)
-    feature_names = temp_vectorizer.get_feature_names_out()
-    word_importance = np.asarray(top_features_matrix.sum(axis=0)).flatten()
-    important_words = [
-        word for word, _ in sorted(zip(feature_names, word_importance), key=lambda x: -x[1])[:30]
-    ]
-    logger.info(f"✅ Extracted {len(important_words)} important keywords")
-except Exception as e:
-    logger.warning(f"⚠️ Could not load training data: {e}")
-    important_words = []
-
-# Extract contact information - AGGRESSIVE APPROACH
+# Extract contact information
 def extract_contact_info(text):
-    logger.info(f"🔍 Searching for contact info in text (length: {len(text)})")
-
-    # Remove all whitespace/newlines for better matching
     text_clean = ' '.join(text.split())
-    logger.info(f"📄 Cleaned text (first 300): {text_clean[:300]}")
 
-    # EMAILS - Super flexible
+    # EMAILS
     email_patterns = [
         r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',
-        r'[a-z0-9]+@[a-z]+\.[a-z]+',  # Simple lowercase
     ]
     emails = []
     for pattern in email_patterns:
         found = re.findall(pattern, text, re.IGNORECASE)
         emails.extend(found)
     emails = list(set([e.lower() for e in emails]))
-    logger.info(f"📧 Found emails: {emails}")
 
-    # PHONES - Every possible format
+    # PHONES - Multiple formats
     phone_patterns = [
-        r'\d{11}',  # 92312598998
-        r'\d{10}',  # 9231259899
-        r'\+\d{11,13}',  # +92312598998
-        r'\d{5}\s?\d{6}',  # 92312 598998
-        r'\d{3}[-\s]?\d{3}[-\s]?\d{4}',  # 923-125-98998
-        r'\(\d{3}\)\s?\d{3}[-\s]?\d{4}',  # (923) 125-98998
+        r'\+\d{1,3}[\s.-]?\(?\d{2,4}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,4}',  # International
+        r'\(\d{3}\)\s?\d{3}[-\s]?\d{4}',  # (123) 456-7890
+        r'\d{3}[-\s]?\d{3}[-\s]?\d{4}',  # 123-456-7890
+        r'\d{10,12}',  # 1234567890
     ]
     phones = []
     for pattern in phone_patterns:
         found = re.findall(pattern, text_clean)
         phones.extend(found)
-
-    # Also try finding numbers anywhere in text
-    all_numbers = re.findall(r'\d+', text)
-    for num in all_numbers:
-        if len(num) >= 10 and len(num) <= 13:
-            phones.append(num)
-
     phones = list(set(phones))
-    logger.info(f"📞 Found phones: {phones}")
 
-    # LINKEDIN - Very flexible
+    # LINKEDIN
     linkedin_patterns = [
-        r'linkedin\.com[/\w-]+',
-        r'linkedin[.\s]com[/\w-]+',
-        r'linked[^\s]*in[^\s]*/in/[\w-]+',
+        r'linkedin\.com/in/[\w-]+',
+        r'linkedin\.com[\w/-]+',
     ]
     linkedin = []
     for pattern in linkedin_patterns:
         matches = re.findall(pattern, text, re.IGNORECASE)
         linkedin.extend(matches)
     linkedin = list(set(linkedin))
-    logger.info(f"🔗 Found LinkedIn: {linkedin}")
 
-    result = {
+    # GITHUB
+    github_patterns = [
+        r'github\.com/[\w-]+',
+    ]
+    github = []
+    for pattern in github_patterns:
+        matches = re.findall(pattern, text, re.IGNORECASE)
+        github.extend(matches)
+    github = list(set(github))
+
+    return {
         'emails': emails,
         'phones': phones,
-        'linkedin': linkedin
+        'linkedin': linkedin,
+        'github': github
     }
 
-    logger.info(f"✅ Contact extraction complete: {len(emails)} emails, {len(phones)} phones, {len(linkedin)} linkedin")
-
-    return result
-
-# Extract keywords found in resume
-def extract_keywords(text, processed_text):
-    keywords = {}
+# Comprehensive skill detection
+def extract_skills(text):
     text_lower = text.lower()
 
-    # Technical skills
-    tech_skills = ['python', 'java', 'javascript', 'c++', 'c', 'html', 'css', 'sql', 'react',
-                   'node', 'angular', 'vue', 'django', 'flask', 'spring', 'mongodb', 'postgresql',
-                   'mysql', 'aws', 'azure', 'docker', 'kubernetes', 'git', 'linux', 'windows',
-                   'machine learning', 'ai', 'data science', 'tensorflow', 'pytorch', 'nlp']
+    # Programming Languages
+    programming_languages = {
+        'python': ['python', 'py'],
+        'javascript': ['javascript', 'js', 'es6', 'es7'],
+        'java': ['java'],
+        'c++': ['c++', 'cpp'],
+        'c#': ['c#', 'csharp'],
+        'c': [' c '],
+        'php': ['php'],
+        'ruby': ['ruby'],
+        'go': ['golang', ' go '],
+        'swift': ['swift'],
+        'kotlin': ['kotlin'],
+        'typescript': ['typescript', 'ts'],
+        'rust': ['rust'],
+        'scala': ['scala'],
+        'dart': ['dart', 'flutter'],
+        'r': [' r '],
+        'sql': ['sql', 'mysql', 'postgresql', 'mssql'],
+        'html': ['html', 'html5'],
+        'css': ['css', 'css3', 'scss', 'sass', 'tailwind'],
+    }
 
-    for skill in tech_skills:
-        if skill in text_lower:
-            keywords[skill] = text_lower.count(skill)
+    # Frameworks & Libraries
+    frameworks = {
+        'react': ['react', 'reactjs', 'react.js'],
+        'angular': ['angular', 'angularjs'],
+        'vue': ['vue', 'vuejs', 'vue.js'],
+        'node.js': ['node', 'nodejs', 'node.js', 'express'],
+        'django': ['django'],
+        'flask': ['flask'],
+        'spring': ['spring', 'spring boot'],
+        'laravel': ['laravel'],
+        'rails': ['rails', 'ruby on rails'],
+        'next.js': ['next', 'nextjs', 'next.js'],
+        '.net': ['.net', 'dotnet', 'asp.net'],
+        'flutter': ['flutter'],
+        'react native': ['react native'],
+    }
 
-    # Add words from processed text
-    words = processed_text.split()
-    for word in set(words):
-        if len(word) > 3 and word in important_words:
-            keywords[word] = words.count(word)
+    # Databases
+    databases = {
+        'mysql': ['mysql'],
+        'postgresql': ['postgresql', 'postgres'],
+        'mongodb': ['mongodb', 'mongo'],
+        'redis': ['redis'],
+        'elasticsearch': ['elasticsearch'],
+        'oracle': ['oracle'],
+        'sqlite': ['sqlite'],
+        'firebase': ['firebase'],
+    }
 
-    return keywords
+    # Cloud & DevOps
+    cloud_devops = {
+        'aws': ['aws', 'amazon web services', 'ec2', 's3', 'lambda'],
+        'azure': ['azure', 'microsoft azure'],
+        'gcp': ['gcp', 'google cloud'],
+        'docker': ['docker'],
+        'kubernetes': ['kubernetes', 'k8s'],
+        'jenkins': ['jenkins'],
+        'git': ['git', 'github', 'gitlab', 'bitbucket'],
+        'ci/cd': ['ci/cd', 'continuous integration', 'continuous deployment'],
+        'linux': ['linux', 'ubuntu', 'centos'],
+        'nginx': ['nginx'],
+        'terraform': ['terraform'],
+    }
 
-# Analyze resume content for specific suggestions
-def analyze_resume_content(text, keywords, contact_info):
-    """Deep analysis of resume content to generate specific suggestions"""
+    # Data & ML
+    data_ml = {
+        'machine learning': ['machine learning', 'ml'],
+        'deep learning': ['deep learning', 'neural network'],
+        'tensorflow': ['tensorflow'],
+        'pytorch': ['pytorch'],
+        'pandas': ['pandas'],
+        'numpy': ['numpy'],
+        'scikit-learn': ['scikit-learn', 'sklearn'],
+        'data analysis': ['data analysis', 'data analytics'],
+        'nlp': ['nlp', 'natural language processing'],
+        'computer vision': ['computer vision', 'opencv'],
+    }
+
+    # Soft Skills
+    soft_skills = {
+        'leadership': ['leadership', 'led', 'leading', 'team lead'],
+        'communication': ['communication', 'communicated'],
+        'problem solving': ['problem solving', 'problem-solving'],
+        'teamwork': ['teamwork', 'team player', 'collaboration'],
+        'project management': ['project management', 'agile', 'scrum'],
+    }
+
+    found_skills = {
+        'programming_languages': [],
+        'frameworks': [],
+        'databases': [],
+        'cloud_devops': [],
+        'data_ml': [],
+        'soft_skills': [],
+    }
+
+    for skill, keywords in programming_languages.items():
+        if any(kw in text_lower for kw in keywords):
+            found_skills['programming_languages'].append(skill)
+
+    for skill, keywords in frameworks.items():
+        if any(kw in text_lower for kw in keywords):
+            found_skills['frameworks'].append(skill)
+
+    for skill, keywords in databases.items():
+        if any(kw in text_lower for kw in keywords):
+            found_skills['databases'].append(skill)
+
+    for skill, keywords in cloud_devops.items():
+        if any(kw in text_lower for kw in keywords):
+            found_skills['cloud_devops'].append(skill)
+
+    for skill, keywords in data_ml.items():
+        if any(kw in text_lower for kw in keywords):
+            found_skills['data_ml'].append(skill)
+
+    for skill, keywords in soft_skills.items():
+        if any(kw in text_lower for kw in keywords):
+            found_skills['soft_skills'].append(skill)
+
+    return found_skills
+
+# Analyze resume sections
+def analyze_sections(text):
     text_lower = text.lower()
-    words = text.split()
+
+    sections = {
+        'has_contact': False,
+        'has_summary': False,
+        'has_experience': False,
+        'has_education': False,
+        'has_skills': False,
+        'has_projects': False,
+        'has_certifications': False,
+        'has_achievements': False,
+    }
+
+    # Contact section indicators
+    contact_indicators = ['email', 'phone', 'linkedin', '@', '+92', '+1', 'contact']
+    sections['has_contact'] = any(ind in text_lower for ind in contact_indicators)
+
+    # Summary/Profile/Objective
+    summary_indicators = ['summary', 'profile', 'objective', 'about me', 'professional summary']
+    sections['has_summary'] = any(ind in text_lower for ind in summary_indicators)
+
+    # Experience section
+    exp_indicators = ['experience', 'work history', 'employment', 'professional experience', 'work experience']
+    sections['has_experience'] = any(ind in text_lower for ind in exp_indicators)
+
+    # Education section
+    edu_indicators = ['education', 'academic', 'degree', 'university', 'college', 'bachelor', 'master', 'bs ', 'ms ', 'phd', 'cgpa', 'gpa']
+    sections['has_education'] = any(ind in text_lower for ind in edu_indicators)
+
+    # Skills section
+    skills_indicators = ['skills', 'technical skills', 'competencies', 'technologies', 'proficiencies']
+    sections['has_skills'] = any(ind in text_lower for ind in skills_indicators)
+
+    # Projects section
+    project_indicators = ['project', 'portfolio', 'personal project', 'side project']
+    sections['has_projects'] = any(ind in text_lower for ind in project_indicators)
+
+    # Certifications
+    cert_indicators = ['certification', 'certificate', 'certified', 'license', 'accreditation']
+    sections['has_certifications'] = any(ind in text_lower for ind in cert_indicators)
+
+    # Achievements/Awards
+    achievement_indicators = ['achievement', 'award', 'honor', 'recognition', 'accomplishment', 'hackathon']
+    sections['has_achievements'] = any(ind in text_lower for ind in achievement_indicators)
+
+    return sections
+
+# Analyze experience quality
+def analyze_experience_quality(text):
+    text_lower = text.lower()
+
+    # Strong action verbs
+    strong_verbs = [
+        'developed', 'implemented', 'designed', 'created', 'built', 'architected',
+        'led', 'managed', 'directed', 'supervised', 'coordinated',
+        'increased', 'improved', 'enhanced', 'optimized', 'reduced',
+        'achieved', 'delivered', 'launched', 'deployed', 'automated',
+        'analyzed', 'researched', 'evaluated', 'resolved', 'transformed',
+        'collaborated', 'mentored', 'trained', 'presented', 'negotiated'
+    ]
+
+    # Weak phrases to avoid
+    weak_phrases = [
+        'responsible for', 'duties included', 'worked on', 'helped with',
+        'assisted with', 'was involved in', 'participated in'
+    ]
+
+    # Quantifiable metrics patterns
+    metric_patterns = [
+        r'\d+%',  # Percentages
+        r'\$[\d,]+[kmb]?',  # Dollar amounts
+        r'\d+\s*(users|customers|clients|employees|team members)',  # User/team counts
+        r'(increased|reduced|improved|decreased|grew|saved)\s*\w*\s*by\s*\d+',  # Impact metrics
+        r'\d+\s*(projects|applications|features|systems)',  # Project counts
+        r'\d+x\s*(faster|improvement|increase)',  # Multiplier improvements
+    ]
 
     analysis = {
-        'has_quantifiable_achievements': bool(re.findall(r'\d+%|\$\d+|increased|decreased|improved|reduced|saved', text_lower)),
-        'has_action_verbs': any(verb in text_lower for verb in ['developed', 'implemented', 'managed', 'led', 'created', 'designed', 'built', 'achieved']),
-        'has_weak_verbs': any(verb in text_lower for verb in ['responsible for', 'duties included', 'worked on', 'helped with']),
-        'has_experience_section': 'experience' in text_lower or 'work history' in text_lower,
-        'has_education_section': 'education' in text_lower or 'degree' in text_lower or 'university' in text_lower,
-        'has_skills_section': 'skills' in text_lower or 'technical skills' in text_lower,
-        'has_summary': 'summary' in text_lower or 'objective' in text_lower or 'profile' in text_lower,
-        'has_projects': 'project' in text_lower,
-        'has_certifications': 'certif' in text_lower or 'license' in text_lower,
-        'word_count': len(words),
-        'technical_skills_count': len(keywords),
-        'has_email': len(contact_info['emails']) > 0,
-        'has_phone': len(contact_info['phones']) > 0,
-        'has_linkedin': len(contact_info['linkedin']) > 0,
-        'has_passive_voice': bool(re.findall(r'\b(was|were|been|being)\s+\w+ed\b', text_lower)),
-        'sentence_length': len(words) / max(len(re.findall(r'[.!?]+', text)), 1),
-        'has_buzzwords': any(word in text_lower for word in ['synergy', 'leverage', 'paradigm', 'disruptive', 'rockstar']),
+        'strong_verbs_count': sum(1 for verb in strong_verbs if verb in text_lower),
+        'weak_phrases_count': sum(1 for phrase in weak_phrases if phrase in text_lower),
+        'has_metrics': any(re.search(pattern, text_lower) for pattern in metric_patterns),
+        'metrics_count': sum(len(re.findall(pattern, text_lower)) for pattern in metric_patterns),
+        'strong_verbs_found': [verb for verb in strong_verbs if verb in text_lower],
+        'weak_phrases_found': [phrase for phrase in weak_phrases if phrase in text_lower],
     }
 
     return analysis
 
+# Calculate comprehensive score
+def calculate_score(text, contact_info, skills, sections, experience_quality):
+    score = 0
+    max_score = 100
+    breakdown = {}
+
+    word_count = len(text.split())
+
+    # 1. Contact Information (15 points)
+    contact_score = 0
+    if contact_info['emails']:
+        contact_score += 5
+    if contact_info['phones']:
+        contact_score += 5
+    if contact_info['linkedin']:
+        contact_score += 3
+    if contact_info['github']:
+        contact_score += 2
+    breakdown['contact_info'] = min(contact_score, 15)
+    score += breakdown['contact_info']
+
+    # 2. Resume Sections (20 points)
+    section_score = 0
+    if sections['has_summary']:
+        section_score += 3
+    if sections['has_experience']:
+        section_score += 5
+    if sections['has_education']:
+        section_score += 4
+    if sections['has_skills']:
+        section_score += 4
+    if sections['has_projects']:
+        section_score += 2
+    if sections['has_certifications']:
+        section_score += 1
+    if sections['has_achievements']:
+        section_score += 1
+    breakdown['sections'] = min(section_score, 20)
+    score += breakdown['sections']
+
+    # 3. Technical Skills (20 points)
+    skill_score = 0
+    total_tech_skills = (
+        len(skills['programming_languages']) +
+        len(skills['frameworks']) +
+        len(skills['databases']) +
+        len(skills['cloud_devops']) +
+        len(skills['data_ml'])
+    )
+
+    if total_tech_skills >= 10:
+        skill_score = 20
+    elif total_tech_skills >= 7:
+        skill_score = 16
+    elif total_tech_skills >= 5:
+        skill_score = 12
+    elif total_tech_skills >= 3:
+        skill_score = 8
+    elif total_tech_skills >= 1:
+        skill_score = 4
+
+    breakdown['technical_skills'] = skill_score
+    score += skill_score
+
+    # 4. Experience Quality (25 points)
+    exp_score = 0
+
+    # Strong action verbs (up to 10 points)
+    if experience_quality['strong_verbs_count'] >= 8:
+        exp_score += 10
+    elif experience_quality['strong_verbs_count'] >= 5:
+        exp_score += 7
+    elif experience_quality['strong_verbs_count'] >= 3:
+        exp_score += 5
+    elif experience_quality['strong_verbs_count'] >= 1:
+        exp_score += 2
+
+    # Quantifiable metrics (up to 10 points)
+    if experience_quality['metrics_count'] >= 5:
+        exp_score += 10
+    elif experience_quality['metrics_count'] >= 3:
+        exp_score += 7
+    elif experience_quality['metrics_count'] >= 1:
+        exp_score += 4
+
+    # Penalty for weak phrases (up to -5 points)
+    exp_score -= min(experience_quality['weak_phrases_count'] * 2, 5)
+
+    breakdown['experience_quality'] = max(exp_score, 0)
+    score += breakdown['experience_quality']
+
+    # 5. Content Length & Quality (10 points)
+    length_score = 0
+    if 300 <= word_count <= 700:
+        length_score = 10
+    elif 200 <= word_count <= 300 or 700 <= word_count <= 900:
+        length_score = 7
+    elif 150 <= word_count <= 200 or 900 <= word_count <= 1100:
+        length_score = 4
+    elif word_count >= 100:
+        length_score = 2
+
+    breakdown['content_length'] = length_score
+    score += length_score
+
+    # 6. Soft Skills (10 points)
+    soft_score = min(len(skills['soft_skills']) * 2, 10)
+    breakdown['soft_skills'] = soft_score
+    score += soft_score
+
+    # Convert to 10-point scale
+    final_score = round((score / max_score) * 10, 1)
+    final_score = min(max(final_score, 0), 10)
+
+    return final_score, breakdown
+
 # Generate specific, actionable suggestions
-def suggest_improvements(text, processed_text, score, keywords, contact_info, issues):
-    """Generate specific, actionable suggestions based on actual resume content"""
+def generate_suggestions(text, contact_info, skills, sections, experience_quality, score, score_breakdown):
     suggestions = []
-    content_analysis = analyze_resume_content(text, keywords, contact_info)
+    text_lower = text.lower()
+    word_count = len(text.split())
 
-    # SPECIFIC SUGGESTIONS BASED ON ACTUAL CONTENT
+    # Priority 1: Critical Missing Elements
+    if not contact_info['emails']:
+        suggestions.append({
+            'priority': 'critical',
+            'category': 'Contact Information',
+            'issue': 'Missing email address',
+            'suggestion': 'Add your professional email address at the top of your resume (e.g., yourname@gmail.com)',
+            'impact': '+5 points'
+        })
 
-    # 1. Contact Information Improvements (HIGHEST PRIORITY)
-    if not content_analysis['has_email']:
-        suggestions.append("✉️ ADD: Include your professional email address at the top (e.g., yourname@email.com)")
+    if not contact_info['phones']:
+        suggestions.append({
+            'priority': 'critical',
+            'category': 'Contact Information',
+            'issue': 'Missing phone number',
+            'suggestion': 'Add your phone number in international format (e.g., +92 332 4462464)',
+            'impact': '+5 points'
+        })
 
-    if not content_analysis['has_phone']:
-        suggestions.append("📱 ADD: Add your phone number in a standard format (e.g., +92-XXX-XXXXXXX)")
+    if not contact_info['linkedin']:
+        suggestions.append({
+            'priority': 'high',
+            'category': 'Contact Information',
+            'issue': 'Missing LinkedIn profile',
+            'suggestion': 'Add your LinkedIn profile URL (linkedin.com/in/yourname) - recruiters frequently check LinkedIn',
+            'impact': '+3 points'
+        })
 
-    if not content_analysis['has_linkedin']:
-        suggestions.append("🔗 ADD: Include your LinkedIn profile URL (linkedin.com/in/yourname)")
+    # Priority 2: Missing Sections
+    if not sections['has_experience']:
+        suggestions.append({
+            'priority': 'critical',
+            'category': 'Resume Structure',
+            'issue': 'Missing Work Experience section',
+            'suggestion': 'Add a "Professional Experience" or "Work Experience" section with your job history, including company name, role, dates, and responsibilities',
+            'impact': '+5 points'
+        })
 
-    # 2. Missing Critical Sections
-    if not content_analysis['has_experience_section']:
-        suggestions.append("💼 ADD SECTION: Create a 'Work Experience' or 'Professional Experience' section with your job history")
+    if not sections['has_education']:
+        suggestions.append({
+            'priority': 'high',
+            'category': 'Resume Structure',
+            'issue': 'Missing Education section',
+            'suggestion': 'Include your "Education" section with degree, university name, graduation year, and GPA if above 3.0',
+            'impact': '+4 points'
+        })
 
-    if not content_analysis['has_education_section']:
-        suggestions.append("🎓 ADD SECTION: Include 'Education' section with your degree, university, and graduation year")
+    if not sections['has_skills']:
+        suggestions.append({
+            'priority': 'high',
+            'category': 'Resume Structure',
+            'issue': 'Missing Skills section',
+            'suggestion': 'Add a dedicated "Technical Skills" section listing your programming languages, frameworks, tools, and technologies',
+            'impact': '+4 points'
+        })
 
-    if not content_analysis['has_skills_section']:
-        suggestions.append("⚙️ ADD SECTION: Create a 'Skills' or 'Technical Skills' section listing your competencies")
+    if not sections['has_summary']:
+        suggestions.append({
+            'priority': 'medium',
+            'category': 'Resume Structure',
+            'issue': 'Missing Professional Summary',
+            'suggestion': 'Add a brief 2-3 sentence professional summary at the top highlighting your experience, key skills, and career goals',
+            'impact': '+3 points'
+        })
 
-    if not content_analysis['has_summary'] and score >= 6:
-        suggestions.append("📝 ADD: Include a brief professional summary (2-3 sentences) at the top highlighting your expertise")
+    if not sections['has_projects'] and score < 7:
+        suggestions.append({
+            'priority': 'medium',
+            'category': 'Resume Structure',
+            'issue': 'No Projects section',
+            'suggestion': 'Add a "Projects" section showcasing 2-3 personal or academic projects with technologies used and outcomes achieved',
+            'impact': '+2 points'
+        })
 
-    # 3. Quantifiable Achievements (CRITICAL FOR HIGH SCORES)
-    if not content_analysis['has_quantifiable_achievements']:
-        suggestions.append("📊 IMPROVE: Add measurable achievements (e.g., 'Increased sales by 30%', 'Managed team of 5', 'Reduced costs by $10K')")
-    elif score < 7:
-        suggestions.append("📈 EXPAND: Add more quantifiable results - include percentages, dollar amounts, team sizes, or time saved")
+    # Priority 3: Experience Quality Issues
+    if experience_quality['metrics_count'] == 0:
+        suggestions.append({
+            'priority': 'high',
+            'category': 'Experience Quality',
+            'issue': 'No quantifiable achievements',
+            'suggestion': 'Add measurable results to your experience bullet points. Examples:\n  • "Developed web application serving 1000+ users"\n  • "Reduced page load time by 40%"\n  • "Led team of 5 developers"\n  • "Increased test coverage from 60% to 95%"',
+            'impact': '+10 points (significant)'
+        })
+    elif experience_quality['metrics_count'] < 3:
+        suggestions.append({
+            'priority': 'medium',
+            'category': 'Experience Quality',
+            'issue': 'Limited quantifiable achievements',
+            'suggestion': 'Add more metrics and numbers to demonstrate impact. Include percentages, user counts, team sizes, time saved, or cost reduced',
+            'impact': '+3-6 points'
+        })
 
-    # 4. Action Verbs Improvements
-    if content_analysis['has_weak_verbs'] and not content_analysis['has_action_verbs']:
-        suggestions.append("💪 REPLACE: Change weak phrases ('responsible for', 'worked on') to strong action verbs ('Led', 'Developed', 'Implemented', 'Achieved')")
-    elif not content_analysis['has_action_verbs']:
-        suggestions.append("🎯 IMPROVE: Start each bullet point with strong action verbs (Developed, Managed, Led, Created, Designed, Implemented)")
+    if experience_quality['weak_phrases_count'] > 0:
+        weak_found = experience_quality['weak_phrases_found'][:2]
+        suggestions.append({
+            'priority': 'high',
+            'category': 'Experience Quality',
+            'issue': f'Using weak phrases: "{", ".join(weak_found)}"',
+            'suggestion': 'Replace weak phrases with strong action verbs:\n  • "Responsible for" → "Managed" or "Led"\n  • "Worked on" → "Developed" or "Implemented"\n  • "Helped with" → "Contributed to" or "Collaborated on"',
+            'impact': '+2-5 points'
+        })
 
-    # 5. Technical Skills Enhancement
-    if content_analysis['technical_skills_count'] < 5:
+    if experience_quality['strong_verbs_count'] < 5:
+        suggestions.append({
+            'priority': 'medium',
+            'category': 'Experience Quality',
+            'issue': 'Limited use of action verbs',
+            'suggestion': 'Start each bullet point with a strong action verb: Developed, Implemented, Designed, Led, Managed, Created, Built, Optimized, Delivered, Achieved',
+            'impact': '+3-7 points'
+        })
+
+    # Priority 4: Skills Enhancement
+    total_tech_skills = (
+        len(skills['programming_languages']) +
+        len(skills['frameworks']) +
+        len(skills['databases']) +
+        len(skills['cloud_devops'])
+    )
+
+    if total_tech_skills < 5:
         missing_skills = []
-        common_skills = ['Python', 'JavaScript', 'SQL', 'React', 'Node.js', 'AWS', 'Git', 'Docker', 'MongoDB', 'Java']
-        for skill in common_skills:
-            if skill.lower() not in text.lower():
+        essential_skills = ['JavaScript', 'Python', 'React', 'Node.js', 'SQL', 'Git', 'AWS', 'Docker']
+        current_skills = (
+            skills['programming_languages'] +
+            skills['frameworks'] +
+            skills['databases'] +
+            skills['cloud_devops']
+        )
+        current_skills_lower = [s.lower() for s in current_skills]
+
+        for skill in essential_skills:
+            if skill.lower() not in current_skills_lower:
                 missing_skills.append(skill)
 
         if missing_skills:
-            suggestions.append(f"🔧 ADD SKILLS: If applicable, include these in-demand skills: {', '.join(missing_skills[:5])}")
-    elif content_analysis['technical_skills_count'] < 10:
-        suggestions.append("🚀 EXPAND: Add more technical skills if you have them (frameworks, tools, platforms, programming languages)")
+            suggestions.append({
+                'priority': 'medium',
+                'category': 'Technical Skills',
+                'issue': f'Limited technical skills listed ({total_tech_skills} found)',
+                'suggestion': f'If applicable, add these in-demand skills to boost your profile: {", ".join(missing_skills[:5])}',
+                'impact': '+4-8 points'
+            })
 
-    # 6. Projects Section
-    if not content_analysis['has_projects'] and score < 7:
-        suggestions.append("💡 ADD SECTION: Include a 'Projects' section showcasing 2-3 relevant projects with technologies used")
+    if not skills['cloud_devops'] and score >= 5:
+        suggestions.append({
+            'priority': 'low',
+            'category': 'Technical Skills',
+            'issue': 'No cloud/DevOps skills mentioned',
+            'suggestion': 'Consider adding cloud (AWS, Azure, GCP) or DevOps skills (Docker, Kubernetes, CI/CD) if you have experience with them',
+            'impact': '+2-4 points'
+        })
 
-    # 7. Certifications
-    if not content_analysis['has_certifications'] and score < 8:
-        suggestions.append("🏆 ADD: Include any relevant certifications (AWS, Google Cloud, Microsoft, etc.) if you have them")
+    # Priority 5: Content Length
+    if word_count < 200:
+        suggestions.append({
+            'priority': 'high',
+            'category': 'Content',
+            'issue': f'Resume too short ({word_count} words)',
+            'suggestion': 'Expand your resume to 400-600 words. Add more details about your responsibilities, achievements, and projects',
+            'impact': '+3-6 points'
+        })
+    elif word_count > 800:
+        suggestions.append({
+            'priority': 'medium',
+            'category': 'Content',
+            'issue': f'Resume may be too long ({word_count} words)',
+            'suggestion': 'Consider condensing to under 700 words. Focus on most relevant and recent experiences. Remove older or less relevant positions',
+            'impact': '+2-4 points'
+        })
 
-    # 8. Length Optimization
-    if content_analysis['word_count'] < 200:
-        suggestions.append(f"📄 EXPAND: Your resume is too brief ({content_analysis['word_count']} words). Aim for 400-600 words with detailed descriptions")
-    elif content_analysis['word_count'] > 800:
-        suggestions.append(f"✂️ CONDENSE: Your resume is too long ({content_analysis['word_count']} words). Remove less relevant details and keep it under 600 words")
+    # Priority 6: Additional Enhancements
+    if not sections['has_certifications'] and score >= 6:
+        suggestions.append({
+            'priority': 'low',
+            'category': 'Certifications',
+            'issue': 'No certifications listed',
+            'suggestion': 'Add relevant certifications to stand out (e.g., AWS Certified, Google Cloud, Microsoft Azure, Coursera certificates)',
+            'impact': '+1-2 points'
+        })
 
-    # 9. Passive Voice Detection
-    if content_analysis['has_passive_voice']:
-        suggestions.append("✍️ REWRITE: Convert passive voice ('was responsible for') to active voice ('Led', 'Managed', 'Developed')")
+    if not contact_info['github'] and 'developer' in text_lower or 'engineer' in text_lower:
+        suggestions.append({
+            'priority': 'low',
+            'category': 'Portfolio',
+            'issue': 'No GitHub profile',
+            'suggestion': 'Add your GitHub profile URL to showcase your code and projects to potential employers',
+            'impact': '+1-2 points'
+        })
 
-    # 10. Avoid Buzzwords
-    if content_analysis['has_buzzwords']:
-        suggestions.append("⚠️ REMOVE: Replace vague buzzwords ('synergy', 'rockstar') with specific achievements and technical skills")
+    # Sort by priority
+    priority_order = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}
+    suggestions.sort(key=lambda x: priority_order.get(x['priority'], 4))
 
-    # 11. Missing Keywords from High-Quality Resumes
-    if important_words:
-        missing_keywords = [kw for kw in important_words[:15] if kw not in processed_text]
-        if missing_keywords and len(missing_keywords) > 3:
-            suggestions.append(f"🔑 KEYWORDS: Consider adding these industry-standard terms if relevant: {', '.join(missing_keywords[:6])}")
+    return suggestions[:10]  # Return top 10 most important suggestions
 
-    # 12. Sentence Length Optimization
-    if content_analysis['sentence_length'] > 25:
-        suggestions.append("📝 SIMPLIFY: Break down long sentences into shorter, clearer statements (aim for 15-20 words per sentence)")
-
-    # 13. Score-Specific Guidance
-    if score < 4:
-        suggestions.append("🔴 CRITICAL: Your resume needs major improvements. Focus on adding quantifiable achievements, technical skills, and proper structure")
-    elif score < 6:
-        suggestions.append("🟡 MODERATE: Good foundation, but needs more specific details, metrics, and professional formatting")
-    elif score >= 8:
-        suggestions.append("🟢 EXCELLENT: Strong resume! Fine-tune with additional metrics and ensure ATS compatibility")
-
-    # 14. ATS Optimization
-    if score >= 6:
-        suggestions.append("🤖 ATS TIP: Use standard section headers ('Work Experience', 'Education', 'Skills') for applicant tracking systems")
-
-    # 15. Format and Structure
-    if not any('section' in s.lower() for s in suggestions[:5]):
-        suggestions.append("📋 FORMAT: Use clear section headers, bullet points, and consistent formatting throughout")
-
-    # Return prioritized suggestions (max 10 most relevant)
-    return suggestions[:10]
-
-# Generate issues
-def detect_issues(text, contact_info, keywords):
+# Detect issues for quick overview
+def detect_issues(contact_info, sections, experience_quality, word_count):
     issues = []
 
     if not contact_info['emails']:
-        issues.append("No email found")
+        issues.append('❌ Missing email address')
     if not contact_info['phones']:
-        issues.append("No phone number found")
+        issues.append('❌ Missing phone number')
     if not contact_info['linkedin']:
-        issues.append("No LinkedIn profile found")
+        issues.append('⚠️ No LinkedIn profile')
 
-    if len(keywords) < 5:
-        issues.append("Limited technical skills mentioned - showcase your technical expertise")
+    if not sections['has_experience']:
+        issues.append('❌ Missing Experience section')
+    if not sections['has_education']:
+        issues.append('❌ Missing Education section')
+    if not sections['has_skills']:
+        issues.append('⚠️ Missing Skills section')
 
-    if len(text.split()) < 200:
-        issues.append("Resume too brief - expand with more relevant details")
-    elif len(text.split()) > 800:
-        issues.append("Resume too lengthy - consider condensing content")
+    if experience_quality['metrics_count'] == 0:
+        issues.append('⚠️ No quantifiable achievements')
+    if experience_quality['weak_phrases_count'] > 0:
+        issues.append('⚠️ Contains weak phrases')
 
-    # Check for common resume sections
-    sections = ['experience', 'education', 'skills', 'summary', 'objective']
-    missing_sections = [s for s in sections if s not in text.lower()]
-    if len(missing_sections) > 2:
-        issues.append(f"Missing important sections: {', '.join(missing_sections[:3])}")
+    if word_count < 200:
+        issues.append('⚠️ Resume too short')
+    elif word_count > 900:
+        issues.append('⚠️ Resume may be too long')
 
     return issues
+
+# Generate strengths
+def detect_strengths(contact_info, skills, sections, experience_quality):
+    strengths = []
+
+    if contact_info['emails'] and contact_info['phones']:
+        strengths.append('✅ Complete contact information')
+    if contact_info['linkedin']:
+        strengths.append('✅ LinkedIn profile included')
+    if contact_info['github']:
+        strengths.append('✅ GitHub profile included')
+
+    if sections['has_summary']:
+        strengths.append('✅ Professional summary present')
+    if sections['has_experience']:
+        strengths.append('✅ Work experience section')
+    if sections['has_education']:
+        strengths.append('✅ Education section')
+    if sections['has_projects']:
+        strengths.append('✅ Projects section showcases work')
+    if sections['has_certifications']:
+        strengths.append('✅ Certifications listed')
+
+    total_tech = (
+        len(skills['programming_languages']) +
+        len(skills['frameworks']) +
+        len(skills['databases'])
+    )
+    if total_tech >= 5:
+        strengths.append(f'✅ Good technical skills ({total_tech} technologies)')
+
+    if experience_quality['strong_verbs_count'] >= 5:
+        strengths.append('✅ Strong action verbs used')
+    if experience_quality['metrics_count'] >= 3:
+        strengths.append('✅ Quantifiable achievements included')
+
+    return strengths
 
 # Main analysis function
 def analyze_resume_text(text):
     try:
         if not text or len(text.strip()) < 50:
-            return {
-                'error': 'Text too short for analysis (minimum 50 characters)'
-            }
+            return {'error': 'Text too short for analysis (minimum 50 characters)'}
 
-        # Preprocess text
-        processed = preprocess(text)
-
-        # Get ML score
-        if model and vectorizer:
-            features = vectorizer.transform([processed])
-            ml_score = model.predict(features)[0]
-            ml_score = float(np.clip(ml_score, 0, 10))  # Ensure score is 0-10
-        else:
-            ml_score = 5.0  # Fallback score
-
-        # Extract contact info
-        contact_info = extract_contact_info(text)
-
-        # Extract keywords
-        keywords = extract_keywords(text, processed)
-
-        # Detect issues
-        issues = detect_issues(text, contact_info, keywords)
-
-        # Generate specific suggestions based on actual content
-        suggestions = suggest_improvements(text, processed, ml_score, keywords, contact_info, issues)
-
-        # Calculate metrics
         word_count = len(text.split())
-        char_count = len(text)
 
-        logger.info(f"✅ Analysis complete - Score: {ml_score:.1f}/10, Keywords: {len(keywords)}")
+        # Extract all information
+        contact_info = extract_contact_info(text)
+        skills = extract_skills(text)
+        sections = analyze_sections(text)
+        experience_quality = analyze_experience_quality(text)
+
+        # Calculate score
+        score, score_breakdown = calculate_score(text, contact_info, skills, sections, experience_quality)
+
+        # Generate suggestions
+        suggestions = generate_suggestions(text, contact_info, skills, sections, experience_quality, score, score_breakdown)
+
+        # Detect issues and strengths
+        issues = detect_issues(contact_info, sections, experience_quality, word_count)
+        strengths = detect_strengths(contact_info, skills, sections, experience_quality)
+
+        # Flatten skills for output
+        all_skills = []
+        for category, skill_list in skills.items():
+            all_skills.extend(skill_list)
+
+        logger.info(f"✅ Analysis complete - Score: {score}/10")
 
         return {
-            'score': round(ml_score, 1),
-            'keywords': keywords,
+            'score': score,
+            'score_breakdown': score_breakdown,
+            'skills': skills,
+            'all_skills': all_skills,
             'contactInfo': contact_info,
+            'sections': sections,
+            'experience_quality': {
+                'strong_verbs_count': experience_quality['strong_verbs_count'],
+                'weak_phrases_count': experience_quality['weak_phrases_count'],
+                'metrics_count': experience_quality['metrics_count'],
+                'has_metrics': experience_quality['has_metrics'],
+            },
             'issues': issues,
+            'strengths': strengths,
             'suggestions': suggestions,
             'analysis_summary': {
-                'total_keywords': len(keywords),
+                'total_skills': len(all_skills),
                 'word_count': word_count,
-                'character_count': char_count
+                'sections_complete': sum(sections.values()),
+                'sections_total': len(sections),
             }
         }
 
     except Exception as e:
         logger.error(f"Analysis error: {str(e)}")
         return {
+            'error': f'Analysis failed: {str(e)}',
             'score': 5.0,
-            'keywords': {},
-            'contactInfo': {'emails': [], 'phones': [], 'linkedin': []},
-            'issues': ['Analysis encountered an error'],
-            'suggestions': ['Try uploading a well-formatted resume'],
-            'analysis_summary': {
-                'total_keywords': 0,
-                'word_count': len(text.split()) if text else 0,
-                'character_count': len(text) if text else 0
-            }
+            'suggestions': [{'priority': 'high', 'suggestion': 'Please try uploading your resume again'}]
         }
 
 # Flask routes
@@ -391,17 +760,19 @@ def analyze_resume_text(text):
 def health_check():
     return jsonify({
         'status': 'healthy',
-        'service': 'Real ML Resume Analysis API',
-        'version': '2.0.0',
-        'model_loaded': model is not None,
+        'service': 'Resume Analysis API v3.0',
         'features': [
-            'Scikit-learn ML Model',
-            'TF-IDF Vectorization',
-            'Keyword Extraction',
-            'Contact Info Detection',
-            'Smart Suggestions'
+            'Comprehensive skill detection',
+            'Section analysis',
+            'Experience quality scoring',
+            'Actionable suggestions',
+            'Quantifiable metrics detection'
         ]
     })
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({'status': 'ok'})
 
 @app.route('/analyze-text', methods=['POST'])
 def analyze_text():
@@ -410,20 +781,15 @@ def analyze_text():
 
         data = request.get_json()
         if not data or 'text' not in data:
-            return jsonify({
-                'error': 'No text provided for analysis'
-            }), 400
+            return jsonify({'error': 'No text provided'}), 400
 
         text = data['text']
-        logger.info(f"🔍 Analyzing resume text of length: {len(text)}")
+        logger.info(f"🔍 Analyzing resume ({len(text)} chars)")
 
-        # Perform analysis
         analysis = analyze_resume_text(text)
 
-        if 'error' in analysis:
+        if 'error' in analysis and analysis.get('score') is None:
             return jsonify(analysis), 400
-
-        logger.info(f"✅ Analysis complete - Score: {analysis['score']}/10")
 
         return jsonify({
             'success': True,
@@ -431,16 +797,10 @@ def analyze_text():
         })
 
     except Exception as e:
-        logger.error(f"❌ Analysis failed: {str(e)}")
-        return jsonify({
-            'error': 'Internal server error during analysis',
-            'details': str(e)
-        }), 500
+        logger.error(f"❌ Error: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    import os
     port = int(os.environ.get('PORT', 5000))
-    logger.info("🚀 Starting Real ML Resume Analysis API")
-    logger.info(f"📍 Server will be available at http://0.0.0.0:{port}")
-    logger.info("🤖 Using trained scikit-learn ML model")
+    logger.info(f"🚀 Starting Resume Analysis API on port {port}")
     app.run(debug=False, host='0.0.0.0', port=port)
